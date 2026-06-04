@@ -13,6 +13,7 @@ const translations = {
   es: {
     "nav.experience": "Experiencia",
     "nav.skills": "Habilidades",
+    "nav.trust": "Confianza",
     "nav.services": "Servicios",
     "nav.contact": "Contacto",
     "hero.country": "Capiata, Paraguay",
@@ -62,6 +63,10 @@ const translations = {
     "education.technical.title": "Tecnico en Informatica",
     "education.technical.text": "Centro Educativo Integral de las Americas · Mejor egresado 2019.",
     "education.courses.text": "Ciberseguridad, redes, hardware, diseno grafico, community manager y mantenimiento informatico.",
+    "education.cisco.text": "Ciberseguridad, redes y fundamentos de hardware.",
+    "education.snpp.text": "Diseno grafico, community manager, redes informaticas y mantenimiento de equipos.",
+    "trust.kicker": "Confianza",
+    "trust.title": "Empresas e instituciones que confiaron",
     "contact.kicker": "Contacto",
     "contact.title": "Conversemos sobre tu proximo sistema, app o proceso.",
     "contact.phone": "Telefono disponible por correo.",
@@ -82,6 +87,7 @@ const translations = {
   en: {
     "nav.experience": "Experience",
     "nav.skills": "Skills",
+    "nav.trust": "Trust",
     "nav.services": "Services",
     "nav.contact": "Contact",
     "hero.country": "Capiata, Paraguay",
@@ -131,6 +137,10 @@ const translations = {
     "education.technical.title": "IT Technician",
     "education.technical.text": "Centro Educativo Integral de las Americas · Best graduate 2019.",
     "education.courses.text": "Cybersecurity, networking, hardware, graphic design, community management and computer maintenance.",
+    "education.cisco.text": "Cybersecurity, networking and hardware fundamentals.",
+    "education.snpp.text": "Graphic design, community management, computer networking and equipment maintenance.",
+    "trust.kicker": "Trust",
+    "trust.title": "Companies and institutions that trusted me",
     "contact.kicker": "Contact",
     "contact.title": "Let's talk about your next system, app or process.",
     "contact.phone": "Phone available by email.",
@@ -151,6 +161,7 @@ const translations = {
   pt: {
     "nav.experience": "Experiencia",
     "nav.skills": "Habilidades",
+    "nav.trust": "Confianca",
     "nav.services": "Servicos",
     "nav.contact": "Contato",
     "hero.country": "Capiata, Paraguai",
@@ -200,6 +211,10 @@ const translations = {
     "education.technical.title": "Tecnico em Informatica",
     "education.technical.text": "Centro Educativo Integral de las Americas · Melhor egresso 2019.",
     "education.courses.text": "Ciberseguranca, redes, hardware, design grafico, community manager e manutencao de computadores.",
+    "education.cisco.text": "Ciberseguranca, redes e fundamentos de hardware.",
+    "education.snpp.text": "Design grafico, community manager, redes informaticas e manutencao de equipamentos.",
+    "trust.kicker": "Confianca",
+    "trust.title": "Empresas e instituicoes que confiaram",
     "contact.kicker": "Contato",
     "contact.title": "Vamos conversar sobre seu proximo sistema, app ou processo.",
     "contact.phone": "Telefone disponivel por email.",
@@ -269,7 +284,7 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.14 });
 
-document.querySelectorAll(".section, .profile-card, .workspace-image, .metric-card").forEach((element) => {
+document.querySelectorAll(".section, .profile-card, .workspace-image, .metric-card, .logo-card, .institution-card").forEach((element) => {
   element.classList.add("reveal");
   revealObserver.observe(element);
 });
