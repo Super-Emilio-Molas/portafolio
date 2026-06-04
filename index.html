@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portafolio de Carlos Emilio Molas Martinez, desarrollador de software, QA Engineer y especialista mobile web.">
+  <title>Carlos Emilio Molas | Portafolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <header class="site-header glass">
+    <a class="brand" href="#inicio" aria-label="Carlos Emilio Molas">EM</a>
+    <nav class="nav" aria-label="Navegacion principal">
+      <a href="#experiencia" data-i18n="nav.experience">Experiencia</a>
+      <a href="#habilidades" data-i18n="nav.skills">Habilidades</a>
+      <a href="#servicios" data-i18n="nav.services">Servicios</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="language-switcher" aria-label="Selector de idioma">
+      <button class="lang-btn active" type="button" data-lang="es">ES</button>
+      <button class="lang-btn" type="button" data-lang="en">EN</button>
+      <button class="lang-btn" type="button" data-lang="pt">PT</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <div class="country-pill glass">
+          <span class="py-flag" aria-label="Bandera de Paraguay"></span>
+          <span data-i18n="hero.country">Capiata, Paraguay</span>
+        </div>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Software Developer · QA Engineer · Mobile & Web</p>
+        <h1>Carlos Emilio Molas Martinez</h1>
+        <p class="hero-text" data-i18n="hero.text">
+          Desarrollo apps mobile y web, pruebo sistemas con criterio de negocio y conecto tecnologia con procesos reales.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#contacto" data-i18n="hero.cta">Trabajemos juntos</a>
+          <button class="button secondary" type="button" data-open-cv data-i18n="hero.cv">Solicitar CV</button>
+          <a class="button ghost" href="https://github.com/Super-Emilio-Molas" target="_blank" rel="noreferrer" data-i18n="hero.github">GitHub</a>
+        </div>
+      </div>
+
+      <div class="profile-shell">
+        <div class="profile-card glass">
+          <img class="profile-photo" src="images/profile.jpg" alt="Foto de perfil de Carlos Emilio Molas">
+          <div>
+            <p class="profile-name">Carlos Emilio</p>
+            <p class="profile-role" data-i18n="hero.role">QA Engineer · Flutter Developer</p>
+          </div>
+        </div>
+        <img class="workspace-image" src="images/hero-workspace.png" alt="Espacio de trabajo tecnologico con laptop, tablet y paneles de codigo">
+        <div class="metric-grid">
+          <article class="metric-card glass">
+            <span>Flutter</span>
+            <p data-i18n="metrics.flutter">Apps Android, Firebase, QR, NFC y Maps.</p>
+          </article>
+          <article class="metric-card glass">
+            <span>QA</span>
+            <p data-i18n="metrics.qa">Azure DevOps, SQL, Postman y pruebas funcionales.</p>
+          </article>
+          <article class="metric-card glass">
+            <span>SAP</span>
+            <p data-i18n="metrics.sap">MM/PM, SOLPED, OT y trazabilidad operativa.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section intro" aria-label="Perfil profesional">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="profile.kicker">Perfil</p>
+        <h2 data-i18n="profile.title">Soluciones sobrias, utiles y pensadas para operar bien.</h2>
+      </div>
+      <p data-i18n="profile.text">
+        Profesional en Informatica con formacion tecnica y universitaria. Vengo de soporte IT, operaciones SAP, desarrollo mobile/web y QA corporativo, con foco en resultados medibles y procesos claros.
+      </p>
+    </section>
+
+    <section class="section" id="experiencia">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="experience.kicker">Trayectoria</p>
+        <h2 data-i18n="experience.title">Experiencia profesional</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item glass">
+          <span class="timeline-year">01</span>
+          <div>
+            <p class="role" data-i18n="experience.ande.role">Tecnico Informatico</p>
+            <h3>ANDE</h3>
+            <p data-i18n="experience.ande.text">Pasantia en mantenimiento preventivo y correctivo de equipos informaticos dentro de un entorno institucional de alta disponibilidad.</p>
+          </div>
+        </article>
+        <article class="timeline-item glass">
+          <span class="timeline-year">02</span>
+          <div>
+            <p class="role" data-i18n="experience.independent.role">Tecnico Informatico Independiente</p>
+            <h3 data-i18n="experience.independent.company">Servicio particular</h3>
+            <p data-i18n="experience.independent.text">Diagnostico, reparacion, instalacion de sistemas, eliminacion de malware, optimizacion y asistencia tecnica a usuarios finales.</p>
+          </div>
+        </article>
+        <article class="timeline-item glass">
+          <span class="timeline-year">03</span>
+          <div>
+            <p class="role">Operativo SAP S/4HANA</p>
+            <h3>Tecnoedil S.A.</h3>
+            <p data-i18n="experience.tecnoedil.text">Facturacion de proveedores, validacion documental, ordenes de trabajo, SOLPED y seguimiento logistico en modulos MM/PM.</p>
+          </div>
+        </article>
+        <article class="timeline-item glass">
+          <span class="timeline-year">04</span>
+          <div>
+            <p class="role" data-i18n="experience.freelance.role">Desarrollador Mobile & Web</p>
+            <h3>Freelancer</h3>
+            <p data-i18n="experience.freelance.text">Apps Flutter, Firebase, paneles administrativos con HTML, CSS y JavaScript, integraciones con QR, NFC y Google Maps API.</p>
+          </div>
+        </article>
+        <article class="timeline-item glass">
+          <span class="timeline-year">05</span>
+          <div>
+            <p class="role">Google Play Console</p>
+            <h3 data-i18n="experience.google.company">Publicacion de apps Android</h3>
+            <p data-i18n="experience.google.text">Gestion de builds, pruebas cerradas, release tracks, produccion y resolucion de incidencias de publicacion.</p>
+          </div>
+        </article>
+        <article class="timeline-item glass">
+          <span class="timeline-year">06</span>
+          <div>
+            <p class="role">Quality Assurance Engineer</p>
+            <h3>Banco Continental</h3>
+            <p data-i18n="experience.bank.text">Pruebas funcionales, gestion de incidencias en Azure DevOps, validacion con SQL/PLSQL, APIs REST con Postman y trabajo en Scrum.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="habilidades">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="skills.kicker">Stack</p>
+        <h2 data-i18n="skills.title">Habilidades tecnicas</h2>
+      </div>
+      <div class="skill-controls glass" aria-label="Filtrar habilidades">
+        <button class="chip active" type="button" data-filter="all" data-i18n="skills.all">Todas</button>
+        <button class="chip" type="button" data-filter="dev">Mobile & Web</button>
+        <button class="chip" type="button" data-filter="qa">QA</button>
+        <button class="chip" type="button" data-filter="ops" data-i18n="skills.ops">ERP & Sistemas</button>
+      </div>
+      <div class="skill-grid">
+        <span data-category="dev">Flutter / Dart</span>
+        <span data-category="dev">Android / Java</span>
+        <span data-category="dev">Firebase</span>
+        <span data-category="dev">HTML / CSS / JS</span>
+        <span data-category="dev">MySQL</span>
+        <span data-category="dev">Google Maps API</span>
+        <span data-category="dev">Google Play Console</span>
+        <span data-category="qa">Azure DevOps</span>
+        <span data-category="qa" data-i18n="skills.functional">Pruebas funcionales</span>
+        <span data-category="qa">SQL / PLSQL</span>
+        <span data-category="qa">DBeaver</span>
+        <span data-category="qa">Postman / APIs</span>
+        <span data-category="qa">Scrum / Agile</span>
+        <span data-category="ops">SAP S/4HANA</span>
+        <span data-category="ops">MM / PM</span>
+        <span data-category="ops">SOLPED / OT</span>
+        <span data-category="ops">Visual Studio</span>
+        <span data-category="ops">VS Code</span>
+        <span data-category="ops" data-i18n="skills.support">Soporte tecnico IT</span>
+      </div>
+    </section>
+
+    <section class="section" id="servicios">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="services.kicker">Valor</p>
+        <h2 data-i18n="services.title">Donde puedo aportar</h2>
+      </div>
+      <div class="project-grid">
+        <article class="project-card glass">
+          <p class="project-number">01</p>
+          <h3 data-i18n="services.mobile.title">Apps operativas mobile</h3>
+          <p data-i18n="services.mobile.text">Aplicaciones Flutter para equipos en campo, autenticacion, datos en nube, mapas, QR y NFC.</p>
+        </article>
+        <article class="project-card glass">
+          <p class="project-number">02</p>
+          <h3 data-i18n="services.web.title">Paneles administrativos</h3>
+          <p data-i18n="services.web.text">Interfaces web limpias para seguimiento, carga de datos, control operativo y visualizacion rapida.</p>
+        </article>
+        <article class="project-card glass">
+          <p class="project-number">03</p>
+          <h3 data-i18n="services.qa.title">Calidad de software</h3>
+          <p data-i18n="services.qa.text">Casos de prueba, validacion de datos, reporte de defectos y pruebas API para entregar con mas confianza.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section education">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="education.kicker">Formacion</p>
+        <h2 data-i18n="education.title">Educacion y certificaciones</h2>
+      </div>
+      <div class="education-grid">
+        <article class="glass">
+          <h3 data-i18n="education.engineering.title">Ingenieria en Informatica</h3>
+          <p data-i18n="education.engineering.text">Universidad Columbia del Paraguay · 2020 - presente · tesis pendiente.</p>
+        </article>
+        <article class="glass">
+          <h3 data-i18n="education.technical.title">Tecnico en Informatica</h3>
+          <p data-i18n="education.technical.text">Centro Educativo Integral de las Americas · Mejor egresado 2019.</p>
+        </article>
+        <article class="glass">
+          <h3>Cisco & SNPP</h3>
+          <p data-i18n="education.courses.text">Ciberseguridad, redes, hardware, diseno grafico, community manager y mantenimiento informatico.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section contact" id="contacto">
+      <div>
+        <p class="eyebrow" data-i18n="contact.kicker">Contacto</p>
+        <h2 data-i18n="contact.title">Conversemos sobre tu proximo sistema, app o proceso.</h2>
+      </div>
+      <div class="contact-card glass">
+        <a href="mailto:emiliomolaspy@gmail.com">emiliomolaspy@gmail.com</a>
+        <a href="https://github.com/Super-Emilio-Molas" target="_blank" rel="noreferrer">github.com/Super-Emilio-Molas</a>
+        <p data-i18n="contact.phone">Telefono disponible por correo.</p>
+        <p data-i18n="contact.location">Capiata, Paraguay</p>
+        <form class="contact-form">
+          <input name="name" type="text" data-i18n-placeholder="form.name" placeholder="Tu nombre" aria-label="Tu nombre">
+          <input name="subject" type="text" data-i18n-placeholder="form.subject" placeholder="Asunto" aria-label="Asunto">
+          <textarea name="message" rows="4" data-i18n-placeholder="form.message" placeholder="Mensaje" aria-label="Mensaje"></textarea>
+          <button class="button primary" type="submit" data-i18n="form.send">Enviar por correo</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="cv-modal" data-cv-modal aria-hidden="true">
+    <div class="modal-backdrop" data-close-cv></div>
+    <section class="modal-panel glass" role="dialog" aria-modal="true" aria-labelledby="cv-title">
+      <button class="modal-close" type="button" data-close-cv aria-label="Cerrar">×</button>
+      <p class="eyebrow" data-i18n="cv.kicker">CV privado</p>
+      <h2 id="cv-title" data-i18n="cv.title">Solicitar CV</h2>
+      <p data-i18n="cv.text">Para cuidar el acceso al documento, dejame tus datos y se abrira un correo con la solicitud.</p>
+      <form class="cv-form">
+        <input name="name" type="text" required data-i18n-placeholder="cv.name" placeholder="Nombre">
+        <input name="email" type="email" required data-i18n-placeholder="cv.email" placeholder="Correo">
+        <textarea name="reason" rows="4" required data-i18n-placeholder="cv.reason" placeholder="Motivo de la solicitud"></textarea>
+        <button class="button primary" type="submit" data-i18n="cv.submit">Solicitar por correo</button>
+      </form>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 Carlos Emilio Molas Martinez</p>
+    <a href="#inicio" data-i18n="footer.top">Volver arriba</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
