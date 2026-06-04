@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260604-1608">
+  <link rel="stylesheet" href="styles.css?v=20260604-1636">
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -59,8 +59,8 @@
         <img class="workspace-image" src="images/hero-workspace.png" alt="Espacio de trabajo tecnologico con laptop, tablet y paneles de codigo">
         <div class="metric-grid">
           <article class="metric-card glass">
-            <span>Flutter</span>
-            <p data-i18n="metrics.flutter">Apps Android, Firebase, QR, NFC y Maps.</p>
+            <span>Producto</span>
+            <p data-i18n="metrics.flutter">Soluciones digitales pensadas para operar, medir y crecer.</p>
           </article>
           <article class="metric-card glass">
             <span>QA</span>
@@ -91,7 +91,7 @@
       </div>
       <div class="life-road">
         <article class="timeline-item glass">
-          <span class="timeline-year"><img src="images/clean/ceida.png" alt=""></span>
+          <span class="timeline-year"><img src="images/clean/ande.png" alt=""></span>
           <div>
             <p class="role" data-i18n="experience.ande.role">Tecnico Informatico</p>
             <h3>ANDE</h3>
@@ -99,7 +99,7 @@
           </div>
         </article>
         <article class="timeline-item glass">
-          <span class="timeline-year">IT</span>
+          <span class="timeline-year"><img src="images/clean/tecnico-informatico.png" alt=""></span>
           <div>
             <p class="role" data-i18n="experience.independent.role">Tecnico Informatico Independiente</p>
             <h3 data-i18n="experience.independent.company">Servicio particular</h3>
@@ -115,15 +115,15 @@
           </div>
         </article>
         <article class="timeline-item glass">
-          <span class="timeline-year">DEV</span>
+          <span class="timeline-year"><img src="images/clean/desarrollador.png" alt=""></span>
           <div>
             <p class="role" data-i18n="experience.freelance.role">Desarrollador Mobile & Web</p>
             <h3>Freelancer</h3>
-            <p data-i18n="experience.freelance.text">Apps Flutter, Firebase, paneles administrativos con HTML, CSS y JavaScript, integraciones con QR, NFC y Google Maps API.</p>
+            <p data-i18n="experience.freelance.text">Desarrollo de soluciones mobile y web completas: interfaces, datos, autenticacion, paneles administrativos, integraciones y despliegue.</p>
           </div>
         </article>
         <article class="timeline-item glass">
-          <span class="timeline-year">GP</span>
+          <span class="timeline-year"><img src="images/clean/google-play.png" alt=""></span>
           <div>
             <p class="role">Google Play Console</p>
             <h3 data-i18n="experience.google.company">Publicacion de apps Android</h3>
@@ -180,12 +180,44 @@
         <p class="eyebrow" data-i18n="trust.kicker">Confianza</p>
         <h2 data-i18n="trust.title">Empresas e instituciones que confiaron</h2>
       </div>
-      <div class="logo-cloud">
-        <article class="logo-card glass"><img src="images/clean/banco-continental.png" alt="Banco Continental"></article>
-        <article class="logo-card glass"><img src="images/clean/tecnoedil.png" alt="Tecnoedil S.A."></article>
-        <article class="logo-card glass"><img src="images/clean/clt.png" alt="CLT S.A."></article>
-        <article class="logo-card glass"><img src="images/clean/celexx.png" alt="Celexx"></article>
-        <article class="logo-card glass"><img src="images/clean/elastiqueria-san-carlos.png" alt="Elastiqueria San Carlos"></article>
+      <div class="trust-carousel" aria-label="Empresas que confiaron">
+        <div class="trust-track">
+          <article class="trust-card glass">
+            <img src="images/clean/banco-continental.png" alt="Banco Continental">
+            <div>
+              <h3>Banco Continental</h3>
+              <p data-i18n="trust.banco">Entidad financiera paraguaya enfocada en banca para personas y empresas, donde aporte calidad, validacion funcional y mirada de negocio.</p>
+            </div>
+          </article>
+          <article class="trust-card glass">
+            <img src="images/clean/tecnoedil.png" alt="Tecnoedil S.A.">
+            <div>
+              <h3>Tecnoedil S.A.</h3>
+              <p data-i18n="trust.tecnoedil">Constructora paraguaya con trayectoria en obras viales, civiles, electromecanicas y portuarias; alli fortalece procesos SAP y operacion logistica.</p>
+            </div>
+          </article>
+          <article class="trust-card glass">
+            <img src="images/clean/clt.png" alt="CLT S.A.">
+            <div>
+              <h3>CLT S.A.</h3>
+              <p data-i18n="trust.clt">Empresa de servicios TI, software y outsourcing; un entorno ideal para conectar QA, desarrollo y soluciones de alta disponibilidad.</p>
+            </div>
+          </article>
+          <article class="trust-card glass">
+            <img src="images/clean/celexx.png" alt="Celexx">
+            <div>
+              <h3>CELEXX</h3>
+              <p data-i18n="trust.celexx">Empresa paraguaya de distribucion tecnologica, integracion de soluciones TI y telecomunicaciones.</p>
+            </div>
+          </article>
+          <article class="trust-card glass">
+            <img src="images/clean/elastiqueria-san-carlos.png" alt="Elastiqueria San Carlos">
+            <div>
+              <h3>Elastiqueria San Carlos</h3>
+              <p data-i18n="trust.sancarlos">Taller mecanico especializado en reparaciones de equipos de gran porte, suspension y soldadura en general.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -198,7 +230,7 @@
         <article class="project-card glass">
           <p class="project-number">01</p>
           <h3 data-i18n="services.mobile.title">Apps operativas mobile</h3>
-          <p data-i18n="services.mobile.text">Aplicaciones Flutter para equipos en campo, autenticacion, datos en nube, mapas, QR y NFC.</p>
+          <p data-i18n="services.mobile.text">Aplicaciones y flujos digitales para equipos operativos, con foco en velocidad, trazabilidad y uso real.</p>
         </article>
         <article class="project-card glass">
           <p class="project-number">02</p>
@@ -223,7 +255,7 @@
           <img src="images/clean/columbia.png" alt="Universidad Columbia del Paraguay">
           <div>
             <h3 data-i18n="education.engineering.title">Ingenieria en Informatica</h3>
-            <p data-i18n="education.engineering.text">Universidad Columbia del Paraguay · 2020 - presente · tesis pendiente.</p>
+            <p data-i18n="education.engineering.text">Universidad Columbia del Paraguay · 2020 - presente.</p>
           </div>
         </article>
         <article class="institution-card glass">
@@ -251,7 +283,7 @@
       <div class="education-grid">
         <article class="glass">
           <h3 data-i18n="education.engineering.title">Ingenieria en Informatica</h3>
-          <p data-i18n="education.engineering.text">Universidad Columbia del Paraguay · 2020 - presente · tesis pendiente.</p>
+          <p data-i18n="education.engineering.text">Universidad Columbia del Paraguay · 2020 - presente.</p>
         </article>
         <article class="glass">
           <h3 data-i18n="education.technical.title">Tecnico en Informatica</h3>
@@ -305,6 +337,6 @@
     <a href="#inicio" data-i18n="footer.top">Volver arriba</a>
   </footer>
 
-  <script src="script.js?v=20260604-1608"></script>
+  <script src="script.js?v=20260604-1636"></script>
 </body>
 </html>
