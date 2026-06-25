@@ -1,342 +1,1261 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portafolio de Carlos Emilio Molas Martinez, desarrollador de software, QA Engineer y especialista mobile web.">
-  <title>Carlos Emilio Molas | Portafolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260604-1642">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Emilio Molas — Portafolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap');
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  :root {
+    --tb-h: 38px;
+    --font: 'Tahoma', 'MS Sans Serif', Arial, sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    font-size: 12px;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    touch-action: none;
+  }
+
+  /* ═══════════════════════════════════
+     ESCRITORIO
+  ═══════════════════════════════════ */
+  #desktop {
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - var(--tb-h));
+    overflow: hidden;
+    background: #3a6ea5;
+  }
+
+  #wallpaper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ═══════════════════════════════════
+     NOMBRE EN EL CIELO
+  ═══════════════════════════════════ */
+  #sky-name {
+    position: absolute;
+    top: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(14px, 4vw, 60px);
+    font-weight: 700;
+    color: rgba(255,255,255,0.18);
+    letter-spacing: 0.1em;
+    text-shadow: 0 2px 24px rgba(255,255,255,0.10);
+    pointer-events: none;
+    white-space: nowrap;
+    font-family: var(--font);
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════
+     ÍCONOS DEL ESCRITORIO — DESKTOP
+  ═══════════════════════════════════ */
+  #icons {
+    position: absolute;
+    top: 14px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 10;
+  }
+
+  /* MÓVIL: grilla abajo */
+  @media (max-width: 600px) {
+    #icons {
+      top: auto;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      width: calc(100vw - 16px);
+      max-width: 400px;
+    }
+    #sky-name {
+      top: 4%;
+      font-size: clamp(11px, 3.5vw, 22px);
+      letter-spacing: 0.06em;
+    }
+  }
+
+  .desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 68px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 2px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .desktop-icon:active,
+  .desktop-icon.selected { background: rgba(49,106,197,0.65); outline: 1px dotted #fff; }
+
+  .icon-img {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3px;
+    flex-shrink: 0;
+  }
+
+  .icon-label {
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px #000, -1px -1px 2px #000;
+    word-break: break-word;
+  }
+
+  .folder-svg { width: 40px; height: 36px; }
+
+  /* ═══════════════════════════════════
+     VENTANAS
+  ═══════════════════════════════════ */
+  .window {
+    position: absolute;
+    min-width: 280px;
+    min-height: 160px;
+    background: #ece9d8;
+    border: 1px solid #0a246a;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5), inset 0 0 0 1px #fff;
+    display: none;
+    flex-direction: column;
+    z-index: 100;
+    border-radius: 6px 6px 0 0;
+  }
+  .window.active { display: flex; }
+
+  /* MÓVIL: ventana fullscreen */
+  @media (max-width: 600px) {
+    .window.active {
+      position: fixed !important;
+      left: 0 !important;
+      top: 0 !important;
+      width: 100vw !important;
+      height: calc(100vh - var(--tb-h)) !important;
+      min-width: unset;
+      min-height: unset;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid #0a246a;
+    }
+    /* ocultar barra de dirección y toolbar en móvil para ganar espacio */
+    .win-addr { display: none !important; }
+  }
+
+  /* Titlebar */
+  .titlebar {
+    display: flex;
+    align-items: center;
+    height: 28px;
+    background: linear-gradient(180deg,#0a5bd4 0%,#1255c1 8%,#0a5bd4 40%,#1c63e0 88%,#0a5bd4 100%);
+    border-radius: 5px 5px 0 0;
+    padding: 0 4px;
+    cursor: grab;
+    flex-shrink: 0;
+    touch-action: none;
+  }
+  .titlebar:active { cursor: grabbing; }
+
+  @media (max-width: 600px) {
+    .titlebar { border-radius: 0; cursor: default; height: 32px; }
+  }
+
+  .titlebar-icon { width: 16px; height: 16px; margin-right: 5px; flex-shrink: 0; }
+
+  .titlebar-title {
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+  }
+
+  .titlebar-buttons { display: flex; gap: 2px; }
+
+  .tb-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font);
+    flex-shrink: 0;
+  }
+  .tb-min { background: linear-gradient(180deg,#5b9cf4 0%,#3972c8 100%); }
+  .tb-max { background: linear-gradient(180deg,#5b9cf4 0%,#3972c8 100%); }
+  .tb-close { background: linear-gradient(180deg,#e15d4d 0%,#c13c2b 100%); border-color:rgba(255,200,200,0.4); }
+  .tb-btn:active { filter: brightness(0.82); }
+
+  /* Toolbar */
+  .win-toolbar {
+    display: flex;
+    align-items: center;
+    height: 22px;
+    background: #ece9d8;
+    border-bottom: 1px solid #aca899;
+    padding: 0 4px;
+    gap: 1px;
+    flex-shrink: 0;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .win-menu-item {
+    padding: 2px 6px;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .win-menu-item:active { background: #316ac5; color: #fff; }
+
+  /* Address */
+  .win-addr {
+    display: flex;
+    align-items: center;
+    height: 22px;
+    background: #ece9d8;
+    border-bottom: 1px solid #aca899;
+    padding: 0 6px;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .addr-label { font-size: 11px; color: #444; white-space: nowrap; }
+  .addr-box {
+    flex: 1;
+    height: 18px;
+    border: 1px solid #7b9ebd;
+    background: #fff;
+    padding: 0 4px;
+    font-size: 10px;
+    font-family: var(--font);
+    color: #333;
+    outline: none;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.15);
+  }
+
+  /* Body */
+  .win-body { display: flex; flex: 1; overflow: hidden; }
+
+  .win-sidebar {
+    width: 140px;
+    background: linear-gradient(180deg,#6a8fcf 0%,#4a6fb5 100%);
+    border-right: 1px solid #3158a5;
+    padding: 6px 0;
+    flex-shrink: 0;
+    overflow-y: auto;
+  }
+
+  /* ocultar sidebar en pantallas muy pequeñas */
+  @media (max-width: 400px) {
+    .win-sidebar { display: none; }
+  }
+
+  .sidebar-section-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: #ffffcc;
+    text-shadow: 0 1px 1px rgba(0,0,60,0.5);
+    padding: 5px 8px 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .sidebar-link {
+    display: block;
+    padding: 4px 8px;
+    color: #fff;
+    font-size: 11px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .sidebar-link:active { color: #ffffaa; }
+
+  .win-content {
+    flex: 1;
+    background: #fff;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+  }
+
+  /* Content panels */
+  .content-panel { padding: 12px 14px; }
+  .content-panel h2 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #003399;
+    border-bottom: 1px solid #a8c4e8;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+  }
+  .content-panel h3 {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0a3d8f;
+    margin: 10px 0 4px;
+  }
+  .content-panel p,
+  .content-panel li {
+    font-size: 11px;
+    color: #222;
+    line-height: 1.6;
+  }
+  .content-panel ul { padding-left: 16px; }
+  .tag {
+    display: inline-block;
+    background: #dbe8fb;
+    border: 1px solid #9ab4e8;
+    border-radius: 2px;
+    padding: 1px 6px;
+    font-size: 10px;
+    color: #003399;
+    margin: 2px 2px 2px 0;
+  }
+  .exp-block { margin-bottom: 12px; border-left: 3px solid #316ac5; padding-left: 8px; }
+  .exp-title { font-size: 12px; font-weight: 700; color: #111; }
+  .exp-company { font-size: 11px; color: #316ac5; font-weight: 700; }
+  .exp-desc { font-size: 11px; color: #444; line-height: 1.5; }
+  .cert-item { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 4px; }
+  .cert-dot { width: 8px; height: 8px; border-radius: 50%; background: #316ac5; margin-top: 3px; flex-shrink: 0; }
+  .lang-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size:11px; }
+  .lang-name { width: 55px; flex-shrink: 0; }
+  .lang-bar { height: 10px; border-radius: 5px; background: linear-gradient(90deg,#316ac5,#6a9fea); border: 1px solid #0a3d8f; }
+
+  /* Statusbar */
+  .win-statusbar {
+    height: 20px;
+    background: #ece9d8;
+    border-top: 1px solid #aca899;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    font-size: 10px;
+    color: #555;
+    flex-shrink: 0;
+  }
+  .status-sep { width: 1px; height: 14px; background: #aca899; margin: 0 6px; }
+
+  /* ═══════════════════════════════════
+     BARRA DE TAREAS
+  ═══════════════════════════════════ */
+  #taskbar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: var(--tb-h);
+    background: linear-gradient(180deg,#245edc 0%,#1c4fc8 3%,#1e57d4 8%,#1a50cc 15%,#3577e8 88%,#1a50cc 100%);
+    display: flex;
+    align-items: center;
+    z-index: 9999;
+    border-top: 1px solid #0f3fa0;
+    box-shadow: 0 -1px 4px rgba(0,0,0,0.5);
+  }
+
+  #start-btn {
+    height: 100%;
+    padding: 0 12px 0 8px;
+    background: linear-gradient(180deg,#62b437 0%,#358a0c 40%,#3a9a10 60%,#62b437 100%);
+    border: none;
+    border-right: 1px solid #1a6008;
+    border-radius: 0 14px 14px 0;
+    color: #fff;
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 700;
+    font-style: italic;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 2px 0 4px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  #start-btn:active { filter: brightness(0.88); }
+
+  .start-orb {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%,#ff6,#e84 60%,#c60 100%);
+    border: 1px solid rgba(255,255,255,0.5);
+    flex-shrink: 0;
+  }
+
+  #taskbar-tasks {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+  #taskbar-tasks::-webkit-scrollbar { display: none; }
+
+  .task-btn {
+    height: 26px;
+    padding: 0 8px;
+    background: linear-gradient(180deg,#3a6fcc 0%,#2a56b8 100%);
+    border: 1px solid #0a246a;
+    border-radius: 2px;
+    color: #fff;
+    font-family: var(--font);
+    font-size: 10px;
+    cursor: pointer;
+    max-width: 110px;
+    min-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: inset 0 1px rgba(255,255,255,0.2);
+  }
+  .task-btn:active,
+  .task-btn.active-task {
+    background: linear-gradient(180deg,#1a3e8c 0%,#2a56b8 100%);
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.4);
+  }
+
+  #tray {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 8px;
+    background: linear-gradient(180deg,#0c3fa0 0%,#0a3490 8%,#1050b4 88%,#0a3490 100%);
+    border-left: 1px solid #0a246a;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  #clock {
+    color: #fff;
+    font-size: 10px;
+    font-family: var(--font);
+    text-align: center;
+    line-height: 1.25;
+    min-width: 52px;
+  }
+  @media (max-width: 400px) {
+    #clock { display: none; }
+    #tray svg { display: none; }
+  }
+
+  /* ═══════════════════════════════════
+     MENÚ INICIO
+  ═══════════════════════════════════ */
+  #start-menu {
+    position: fixed;
+    bottom: var(--tb-h);
+    left: 0;
+    width: min(330px, 100vw);
+    background: #ece9d8;
+    border: 1px solid #0a246a;
+    border-radius: 6px 6px 0 0;
+    z-index: 99999;
+    display: none;
+    box-shadow: 3px -3px 12px rgba(0,0,0,0.45);
+    overflow: hidden;
+  }
+
+  .sm-header {
+    background: linear-gradient(180deg,#0a5bd4 0%,#1255c1 8%,#0a5bd4 40%,#1c63e0 88%,#0a5bd4 100%);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sm-avatar {
+    width: 44px; height: 44px;
+    border-radius: 3px;
+    background: linear-gradient(135deg,#60a8f0,#1a5dc8);
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .sm-username { color: #fff; font-size: 13px; font-weight: 700; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+
+  .sm-body { display: flex; }
+  .sm-left { flex: 1; padding: 4px 0; border-right: 1px solid #aca899; }
+  .sm-right { width: 130px; padding: 4px 0; background: #d4cfc4; }
+
+  /* en móvil muy pequeño ocultamos sm-right */
+  @media (max-width: 380px) { .sm-right { display: none; } }
+
+  .sm-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    color: #000;
+  }
+  .sm-item:active { background: #316ac5; color: #fff; }
+  .sm-item-icon { width: 22px; height: 22px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .sm-sep { height: 1px; background: #aca899; margin: 3px 0; }
+
+  .sm-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5px 10px;
+    background: linear-gradient(180deg,#0a5bd4,#0a4ab8);
+    gap: 8px;
+  }
+  .sm-footer-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #fff;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 3px 8px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 2px;
+  }
+  .sm-footer-btn:active { background: rgba(255,255,255,0.15); }
+
+  /* ═══════════════════════════════════
+     BURBUJA DE NOTIFICACIÓN
+  ═══════════════════════════════════ */
+  #bubble {
+    position: fixed;
+    bottom: calc(var(--tb-h) + 8px);
+    right: 10px;
+    background: #ffffcc;
+    border: 1px solid #888;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #333;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    z-index: 99998;
+    max-width: 180px;
+    display: none;
+    line-height: 1.4;
+  }
+  #bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; right: 12px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #888;
+  }
+
+  /* ═══════════════════════════════════
+     ANIMACIÓN APERTURA
+  ═══════════════════════════════════ */
+  @keyframes winOpen {
+    from { opacity:0; transform: scale(0.88); }
+    to   { opacity:1; transform: scale(1); }
+  }
+  .window.opening { animation: winOpen 0.14s ease-out forwards; }
+
+  /* ═══════════════════════════════════
+     SCROLLBAR CLÁSICA (solo desktop)
+  ═══════════════════════════════════ */
+  @media (min-width: 601px) {
+    ::-webkit-scrollbar { width: 16px; height: 16px; }
+    ::-webkit-scrollbar-track { background: #e0ddd0; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg,#d4cfc4 0%,#b8b4a8 50%,#d4cfc4 100%);
+      border: 1px solid #a0a0a0;
+    }
+    ::-webkit-scrollbar-button {
+      background: linear-gradient(180deg,#ece9d8,#d4cfc4);
+      border: 1px solid #a0a0a0;
+      height: 16px; width: 16px;
+    }
+  }
+</style>
 </head>
 <body>
-  <div class="ambient" aria-hidden="true"></div>
 
-  <header class="site-header glass">
-    <a class="brand" href="#inicio" aria-label="Carlos Emilio Molas">EM</a>
-    <nav class="nav" aria-label="Navegacion principal">
-      <a href="#experiencia" data-i18n="nav.experience">Experiencia</a>
-      <a href="#habilidades" data-i18n="nav.skills">Habilidades</a>
-      <a href="#confianza" data-i18n="nav.trust">Confianza</a>
-      <a href="#servicios" data-i18n="nav.services">Servicios</a>
-      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
-    </nav>
-    <div class="language-switcher" aria-label="Selector de idioma">
-      <button class="lang-btn active" type="button" data-lang="es">ES</button>
-      <button class="lang-btn" type="button" data-lang="en">EN</button>
-      <button class="lang-btn" type="button" data-lang="pt">PT</button>
+<!-- ═══ ESCRITORIO ═══ -->
+<div id="desktop">
+
+  <!-- Wallpaper XP -->
+  <svg id="wallpaper" viewBox="0 0 1440 768" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a9fd4"/>
+        <stop offset="45%" stop-color="#78c0e8"/>
+        <stop offset="80%" stop-color="#a8d8f0"/>
+        <stop offset="100%" stop-color="#c8e8f8"/>
+      </linearGradient>
+      <linearGradient id="hill1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5ab832"/>
+        <stop offset="100%" stop-color="#2d8010"/>
+      </linearGradient>
+      <linearGradient id="hill2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6ec83e"/>
+        <stop offset="100%" stop-color="#3a9818"/>
+      </linearGradient>
+      <linearGradient id="hill3" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4aaa28"/>
+        <stop offset="100%" stop-color="#1e7008"/>
+      </linearGradient>
+      <filter id="blur1"><feGaussianBlur stdDeviation="1.5"/></filter>
+      <filter id="cloudblur"><feGaussianBlur stdDeviation="8"/></filter>
+    </defs>
+    <rect width="1440" height="768" fill="url(#sky)"/>
+    <!-- Nubes -->
+    <g opacity="0.85">
+      <ellipse cx="200" cy="120" rx="120" ry="45" fill="#fff" filter="url(#cloudblur)" opacity="0.6"/>
+      <ellipse cx="260" cy="108" rx="90" ry="38" fill="#fff" filter="url(#cloudblur)" opacity="0.7"/>
+      <ellipse cx="800" cy="90" rx="140" ry="50" fill="#fff" filter="url(#cloudblur)" opacity="0.55"/>
+      <ellipse cx="870" cy="76" rx="100" ry="42" fill="#fff" filter="url(#cloudblur)" opacity="0.65"/>
+      <ellipse cx="1280" cy="140" rx="110" ry="40" fill="#fff" filter="url(#cloudblur)" opacity="0.5"/>
+      <ellipse cx="1340" cy="125" rx="80" ry="34" fill="#fff" filter="url(#cloudblur)" opacity="0.6"/>
+      <ellipse cx="550" cy="160" rx="90" ry="32" fill="#fff" filter="url(#cloudblur)" opacity="0.4"/>
+    </g>
+    <!-- Colinas fondo -->
+    <path d="M0 520 Q200 360 400 430 Q600 500 720 380 Q840 260 1000 350 Q1160 440 1440 300 L1440 768 L0 768 Z" fill="#3a9018" opacity="0.5" filter="url(#blur1)"/>
+    <!-- Colina izq -->
+    <path d="M-100 768 Q100 480 300 460 Q480 440 560 520 Q620 568 680 600 L700 768 Z" fill="url(#hill1)"/>
+    <path d="M-100 768 Q100 510 300 490 Q400 475 460 510 L460 768 Z" fill="#2a7010" opacity="0.4"/>
+    <!-- Colina principal (icónica XP) -->
+    <path d="M500 768 Q600 580 720 480 Q840 380 1000 420 Q1140 460 1200 510 Q1320 580 1440 540 L1440 768 Z" fill="url(#hill2)"/>
+    <path d="M720 480 Q840 380 1000 420 Q1100 448 1160 480 Q1040 430 920 450 Q820 468 760 520 Z" fill="#8de050" opacity="0.35"/>
+    <!-- Colinas frente -->
+    <path d="M-80 768 Q80 640 200 620 Q320 600 380 660 L420 768 Z" fill="url(#hill3)"/>
+    <path d="M1100 768 Q1200 650 1320 630 Q1400 620 1440 650 L1440 768 Z" fill="url(#hill3)"/>
+    <!-- Pasto -->
+    <rect x="0" y="710" width="1440" height="58" fill="#2a8010"/>
+    <path d="M0 710 Q360 698 720 710 Q1080 722 1440 710 L1440 768 L0 768 Z" fill="#3a9820"/>
+  </svg>
+
+  <!-- Nombre en el cielo -->
+  <div id="sky-name">Carlos Emilio Molas Martínez</div>
+
+  <!-- Íconos -->
+  <div id="icons">
+
+    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-perfil')" onclick="openWindow('win-perfil')">
+      <div class="icon-img">
+        <svg class="folder-svg" viewBox="0 0 40 36"><path d="M2 10 Q2 6 6 6 L14 6 L17 9 L34 9 Q38 9 38 13 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#e8c84a" stroke="#c8a820" stroke-width="1"/><path d="M2 14 L38 14 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#f0d860" stroke="#c8a820" stroke-width="1"/></svg>
+      </div>
+      <div class="icon-label">Perfil</div>
     </div>
-  </header>
 
-  <main>
-    <section class="hero" id="inicio">
-      <div class="hero-copy">
-        <div class="country-pill glass">
-          <span class="py-flag" aria-label="Bandera de Paraguay"></span>
-          <span data-i18n="hero.country">Capiata, Paraguay</span>
-        </div>
-        <p class="eyebrow" data-i18n="hero.eyebrow">Software Developer · QA Engineer · Mobile & Web</p>
-        <h1>Carlos Emilio Molas Martinez</h1>
-        <p class="hero-text" data-i18n="hero.text">
-          Construyo soluciones digitales confiables, valido calidad con criterio de negocio y convierto procesos complejos en experiencias claras.
-        </p>
-        <div class="hero-actions">
-          <a class="button primary" href="#contacto" data-i18n="hero.cta">Trabajemos juntos</a>
-          <button class="button secondary" type="button" data-open-cv data-i18n="hero.cv">Solicitar CV</button>
-          <a class="button ghost" href="https://github.com/Super-Emilio-Molas" target="_blank" rel="noreferrer" data-i18n="hero.github">GitHub</a>
-        </div>
+    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-exp')" onclick="openWindow('win-exp')">
+      <div class="icon-img">
+        <svg class="folder-svg" viewBox="0 0 40 36"><path d="M2 10 Q2 6 6 6 L14 6 L17 9 L34 9 Q38 9 38 13 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#4a7ae8" stroke="#2a50c8" stroke-width="1"/><path d="M2 14 L38 14 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#6090f8" stroke="#2a50c8" stroke-width="1"/><rect x="10" y="18" width="20" height="2" rx="1" fill="#fff" opacity="0.7"/><rect x="10" y="22" width="14" height="2" rx="1" fill="#fff" opacity="0.5"/></svg>
       </div>
+      <div class="icon-label">Experiencia</div>
+    </div>
 
-      <div class="profile-shell">
-        <div class="profile-card glass">
-          <img class="profile-photo" src="images/profile.jpg" alt="Foto de perfil de Carlos Emilio Molas">
-          <div>
-            <p class="profile-name">Carlos Emilio</p>
-            <p class="profile-role" data-i18n="hero.role">QA Engineer · Flutter Developer</p>
-          </div>
-        </div>
-        <img class="workspace-image" src="images/hero-workspace.png" alt="Espacio de trabajo tecnologico con laptop, tablet y paneles de codigo">
-        <div class="metric-grid">
-          <article class="metric-card glass">
-            <span>Producto</span>
-            <p data-i18n="metrics.flutter">Soluciones digitales pensadas para operar, medir y crecer.</p>
-          </article>
-          <article class="metric-card glass">
-            <span>QA</span>
-            <p data-i18n="metrics.qa">Azure DevOps, SQL, Postman y pruebas funcionales.</p>
-          </article>
-          <article class="metric-card glass">
-            <span>SAP</span>
-            <p data-i18n="metrics.sap">MM/PM, SOLPED, OT y trazabilidad operativa.</p>
-          </article>
-        </div>
+    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-skills')" onclick="openWindow('win-skills')">
+      <div class="icon-img">
+        <svg class="folder-svg" viewBox="0 0 40 36"><path d="M2 10 Q2 6 6 6 L14 6 L17 9 L34 9 Q38 9 38 13 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#d44ae0" stroke="#a020b8" stroke-width="1"/><path d="M2 14 L38 14 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#e060f0" stroke="#a020b8" stroke-width="1"/><circle cx="20" cy="23" r="7" fill="none" stroke="#fff" stroke-width="2" opacity="0.7"/></svg>
       </div>
-    </section>
+      <div class="icon-label">Skills</div>
+    </div>
 
-    <section class="section intro" aria-label="Perfil profesional">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="profile.kicker">Perfil</p>
-        <h2 data-i18n="profile.title">Soluciones sobrias, utiles y pensadas para operar bien.</h2>
+    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-edu')" onclick="openWindow('win-edu')">
+      <div class="icon-img">
+        <svg class="folder-svg" viewBox="0 0 40 36"><path d="M2 10 Q2 6 6 6 L14 6 L17 9 L34 9 Q38 9 38 13 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#e0602a" stroke="#b83810" stroke-width="1"/><path d="M2 14 L38 14 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#f07040" stroke="#b83810" stroke-width="1"/><path d="M14 25 L20 18 L26 25 Z" fill="#fff" opacity="0.7"/><rect x="17" y="25" width="6" height="4" fill="#fff" opacity="0.6"/></svg>
       </div>
-      <p data-i18n="profile.text">
-        Profesional en Informatica con formacion tecnica y universitaria. Vengo de soporte IT, operaciones SAP, desarrollo mobile/web y QA corporativo, con foco en resultados medibles y procesos claros.
-      </p>
-    </section>
+      <div class="icon-label">Educación</div>
+    </div>
 
-    <section class="section" id="experiencia">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="experience.kicker">Trayectoria</p>
-        <h2 data-i18n="experience.title">Experiencia profesional</h2>
+    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-jau')" onclick="openWindow('win-jau')">
+      <div class="icon-img">
+        <svg class="folder-svg" viewBox="0 0 40 36"><path d="M2 10 Q2 6 6 6 L14 6 L17 9 L34 9 Q38 9 38 13 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#20b870" stroke="#0a8848" stroke-width="1"/><path d="M2 14 L38 14 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#30d880" stroke="#0a8848" stroke-width="1"/><text x="20" y="27" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Arial" opacity="0.9">Ja'u</text></svg>
       </div>
-      <div class="life-road">
-        <article class="timeline-item glass">
-          <span class="timeline-year"><img src="images/clean/ande.png" alt=""></span>
-          <div>
-            <p class="role" data-i18n="experience.ande.role">Tecnico Informatico</p>
-            <h3>ANDE</h3>
-            <p data-i18n="experience.ande.text">Pasantia en mantenimiento preventivo y correctivo de equipos informaticos dentro de un entorno institucional de alta disponibilidad.</p>
-          </div>
-        </article>
-        <article class="timeline-item glass">
-          <span class="timeline-year"><img src="images/clean/tecnico-informatico.png" alt=""></span>
-          <div>
-            <p class="role" data-i18n="experience.independent.role">Tecnico Informatico Independiente</p>
-            <h3 data-i18n="experience.independent.company">Servicio particular</h3>
-            <p data-i18n="experience.independent.text">Diagnostico, reparacion, instalacion de sistemas, eliminacion de malware, optimizacion y asistencia tecnica a usuarios finales.</p>
-          </div>
-        </article>
-        <article class="timeline-item glass">
-          <span class="timeline-year"><img src="images/clean/tecnoedil.png" alt=""></span>
-          <div>
-            <p class="role">Operativo SAP S/4HANA</p>
-            <h3>Tecnoedil S.A.</h3>
-            <p data-i18n="experience.tecnoedil.text">Facturacion de proveedores, validacion documental, ordenes de trabajo, SOLPED y seguimiento logistico en modulos MM/PM.</p>
-          </div>
-        </article>
-        <article class="timeline-item glass">
-          <span class="timeline-year"><img src="images/clean/desarrollador.png" alt=""></span>
-          <div>
-            <p class="role" data-i18n="experience.freelance.role">Desarrollador Mobile & Web</p>
-            <h3>Freelancer</h3>
-            <p data-i18n="experience.freelance.text">Desarrollo de soluciones mobile y web completas: interfaces, datos, autenticacion, paneles administrativos, integraciones y despliegue.</p>
-          </div>
-        </article>
-        <article class="timeline-item glass">
-          <span class="timeline-year"><img src="images/clean/google-play.png" alt=""></span>
-          <div>
-            <p class="role">Google Play Console</p>
-            <h3 data-i18n="experience.google.company">Publicacion de apps Android</h3>
-            <p data-i18n="experience.google.text">Gestion de builds, pruebas cerradas, release tracks, produccion y resolucion de incidencias de publicacion.</p>
-          </div>
-        </article>
-        <article class="timeline-item glass">
-          <span class="timeline-year"><img src="images/clean/banco-continental.png" alt=""></span>
-          <div>
-            <p class="role">Quality Assurance Engineer</p>
-            <h3>Banco Continental</h3>
-            <p data-i18n="experience.bank.text">Pruebas funcionales, gestion de incidencias en Azure DevOps, validacion con SQL/PLSQL, APIs REST con Postman y trabajo en Scrum.</p>
-          </div>
-        </article>
-      </div>
-    </section>
+      <div class="icon-label">Ja'u</div>
+    </div>
 
-    <section class="section" id="habilidades">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="skills.kicker">Stack</p>
-        <h2 data-i18n="skills.title">Habilidades tecnicas</h2>
+    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-contacto')" onclick="openWindow('win-contacto')">
+      <div class="icon-img">
+        <svg viewBox="0 0 40 36" width="40" height="36"><rect x="4" y="8" width="32" height="22" rx="2" fill="#fffbe8" stroke="#c8a820" stroke-width="1.5"/><path d="M4 10 L20 22 L36 10" stroke="#c8a820" stroke-width="1.5" fill="none"/><line x1="4" y1="30" x2="14" y2="20" stroke="#c8a820" stroke-width="1"/><line x1="36" y1="30" x2="26" y2="20" stroke="#c8a820" stroke-width="1"/></svg>
       </div>
-      <div class="skill-controls glass" aria-label="Filtrar habilidades">
-        <button class="chip active" type="button" data-filter="all" data-i18n="skills.all">Todas</button>
-        <button class="chip" type="button" data-filter="dev">Mobile & Web</button>
-        <button class="chip" type="button" data-filter="qa">QA</button>
-        <button class="chip" type="button" data-filter="ops" data-i18n="skills.ops">ERP & Sistemas</button>
-      </div>
-      <div class="skill-grid">
-        <span data-category="dev">Flutter / Dart</span>
-        <span data-category="dev">Android / Java</span>
-        <span data-category="dev">Firebase</span>
-        <span data-category="dev">HTML / CSS / JS</span>
-        <span data-category="dev">MySQL</span>
-        <span data-category="dev">Google Maps API</span>
-        <span data-category="dev">Google Play Console</span>
-        <span data-category="qa">Azure DevOps</span>
-        <span data-category="qa" data-i18n="skills.functional">Pruebas funcionales</span>
-        <span data-category="qa">SQL / PLSQL</span>
-        <span data-category="qa">DBeaver</span>
-        <span data-category="qa">Postman / APIs</span>
-        <span data-category="qa">Scrum / Agile</span>
-        <span data-category="ops">SAP S/4HANA</span>
-        <span data-category="ops">MM / PM</span>
-        <span data-category="ops">SOLPED / OT</span>
-        <span data-category="ops">Visual Studio</span>
-        <span data-category="ops">VS Code</span>
-        <span data-category="ops" data-i18n="skills.support">Soporte tecnico IT</span>
-      </div>
-    </section>
+      <div class="icon-label">Contacto</div>
+    </div>
 
-    <section class="section trust-section" id="confianza">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="trust.kicker">Confianza</p>
-        <h2 data-i18n="trust.title">Empresas e instituciones que confiaron</h2>
-      </div>
-      <div class="trust-carousel" aria-label="Empresas que confiaron">
-        <div class="trust-track">
-          <article class="trust-card glass">
-            <img src="images/clean/banco-continental.png" alt="Banco Continental">
-            <div>
-              <h3>Banco Continental</h3>
-              <p data-i18n="trust.banco">Entidad financiera paraguaya enfocada en banca para personas y empresas, donde aporte calidad, validacion funcional y mirada de negocio.</p>
-            </div>
-          </article>
-          <article class="trust-card glass">
-            <img src="images/clean/tecnoedil.png" alt="Tecnoedil S.A.">
-            <div>
-              <h3>Tecnoedil S.A.</h3>
-              <p data-i18n="trust.tecnoedil">Constructora paraguaya con trayectoria en obras viales, civiles, electromecanicas y portuarias; alli fortalece procesos SAP y operacion logistica.</p>
-            </div>
-          </article>
-          <article class="trust-card glass">
-            <img src="images/clean/clt.png" alt="CLT S.A.">
-            <div>
-              <h3>CLT S.A.</h3>
-              <p data-i18n="trust.clt">Empresa de servicios TI, software y outsourcing; un entorno ideal para conectar QA, desarrollo y soluciones de alta disponibilidad.</p>
-            </div>
-          </article>
-          <article class="trust-card glass">
-            <img src="images/clean/celexx.png" alt="Celexx">
-            <div>
-              <h3>CELEXX</h3>
-              <p data-i18n="trust.celexx">Empresa paraguaya de distribucion tecnologica, integracion de soluciones TI y telecomunicaciones.</p>
-            </div>
-          </article>
-          <article class="trust-card glass">
-            <img src="images/clean/elastiqueria-san-carlos.png" alt="Elastiqueria San Carlos">
-            <div>
-              <h3>Elastiqueria San Carlos</h3>
-              <p data-i18n="trust.sancarlos">Taller mecanico especializado en reparaciones de equipos de gran porte, suspension y soldadura en general.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+  </div><!-- /icons -->
+</div><!-- /desktop -->
 
-    <section class="section" id="servicios">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="services.kicker">Valor</p>
-        <h2 data-i18n="services.title">Donde puedo aportar</h2>
-      </div>
-      <div class="project-grid">
-        <article class="project-card glass">
-          <p class="project-number">01</p>
-          <h3 data-i18n="services.mobile.title">Apps operativas mobile</h3>
-          <p data-i18n="services.mobile.text">Aplicaciones y flujos digitales para equipos operativos, con foco en velocidad, trazabilidad y uso real.</p>
-        </article>
-        <article class="project-card glass">
-          <p class="project-number">02</p>
-          <h3 data-i18n="services.web.title">Paneles administrativos</h3>
-          <p data-i18n="services.web.text">Interfaces web limpias para seguimiento, carga de datos, control operativo y visualizacion rapida.</p>
-        </article>
-        <article class="project-card glass">
-          <p class="project-number">03</p>
-          <h3 data-i18n="services.qa.title">Calidad de software</h3>
-          <p data-i18n="services.qa.text">Casos de prueba, validacion de datos, reporte de defectos y pruebas API para entregar con mas confianza.</p>
-        </article>
-      </div>
-    </section>
 
-    <section class="section education">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="education.kicker">Formacion</p>
-        <h2 data-i18n="education.title">Educacion y certificaciones</h2>
-      </div>
-      <div class="institution-grid">
-        <article class="institution-card glass">
-          <img src="images/clean/columbia.png" alt="Universidad Columbia del Paraguay">
-          <div>
-            <h3 data-i18n="education.engineering.title">Ingenieria en Informatica</h3>
-            <p data-i18n="education.engineering.text">Universidad Columbia del Paraguay · 2020 - presente.</p>
-          </div>
-        </article>
-        <article class="institution-card glass">
-          <img src="images/clean/ceida.png" alt="Centro Educativo Integral de las Americas">
-          <div>
-            <h3 data-i18n="education.technical.title">Tecnico en Informatica</h3>
-            <p data-i18n="education.technical.text">Centro Educativo Integral de las Americas · Mejor egresado 2019.</p>
-          </div>
-        </article>
-        <article class="institution-card glass">
-          <img src="images/clean/cisco.png" alt="Cisco Networking Academy">
-          <div>
-            <h3>Cisco Networking Academy</h3>
-            <p data-i18n="education.cisco.text">Ciberseguridad, redes y fundamentos de hardware.</p>
-          </div>
-        </article>
-        <article class="institution-card glass">
-          <img src="images/clean/snpp.png" alt="Servicio Nacional de Promocion Profesional">
-          <div>
-            <h3>SNPP</h3>
-            <p data-i18n="education.snpp.text">Diseno grafico, community manager, redes informaticas y mantenimiento de equipos.</p>
-          </div>
-        </article>
-      </div>
-      <div class="education-grid">
-        <article class="glass">
-          <h3 data-i18n="education.engineering.title">Ingenieria en Informatica</h3>
-          <p data-i18n="education.engineering.text">Universidad Columbia del Paraguay · 2020 - presente.</p>
-        </article>
-        <article class="glass">
-          <h3 data-i18n="education.technical.title">Tecnico en Informatica</h3>
-          <p data-i18n="education.technical.text">Centro Educativo Integral de las Americas · Mejor egresado 2019.</p>
-        </article>
-        <article class="glass">
-          <h3>Cisco & SNPP</h3>
-          <p data-i18n="education.courses.text">Ciberseguridad, redes, hardware, diseno grafico, community manager y mantenimiento informatico.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section contact" id="contacto">
-      <div>
-        <p class="eyebrow" data-i18n="contact.kicker">Contacto</p>
-        <h2 data-i18n="contact.title">Conversemos sobre tu proximo sistema, app o proceso.</h2>
-      </div>
-      <div class="contact-card glass">
-        <a href="mailto:emiliomolaspy@gmail.com">emiliomolaspy@gmail.com</a>
-        <a href="https://github.com/Super-Emilio-Molas" target="_blank" rel="noreferrer">github.com/Super-Emilio-Molas</a>
-        <p data-i18n="contact.phone">Telefono disponible por correo.</p>
-        <p data-i18n="contact.location">Capiata, Paraguay</p>
-        <form class="contact-form">
-          <input name="name" type="text" data-i18n-placeholder="form.name" placeholder="Tu nombre" aria-label="Tu nombre">
-          <input name="subject" type="text" data-i18n-placeholder="form.subject" placeholder="Asunto" aria-label="Asunto">
-          <textarea name="message" rows="4" data-i18n-placeholder="form.message" placeholder="Mensaje" aria-label="Mensaje"></textarea>
-          <button class="button primary" type="submit" data-i18n="form.send">Enviar por correo</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <div class="cv-modal" data-cv-modal aria-hidden="true">
-    <div class="modal-backdrop" data-close-cv></div>
-    <section class="modal-panel glass" role="dialog" aria-modal="true" aria-labelledby="cv-title">
-      <button class="modal-close" type="button" data-close-cv aria-label="Cerrar">×</button>
-      <p class="eyebrow" data-i18n="cv.kicker">CV privado</p>
-      <h2 id="cv-title" data-i18n="cv.title">Solicitar CV</h2>
-      <p data-i18n="cv.text">Para cuidar el acceso al documento, dejame tus datos y se abrira un correo con la solicitud.</p>
-      <form class="cv-form">
-        <input name="name" type="text" required data-i18n-placeholder="cv.name" placeholder="Nombre">
-        <input name="email" type="email" required data-i18n-placeholder="cv.email" placeholder="Correo">
-        <textarea name="reason" rows="4" required data-i18n-placeholder="cv.reason" placeholder="Motivo de la solicitud"></textarea>
-        <button class="button primary" type="submit" data-i18n="cv.submit">Solicitar por correo</button>
-      </form>
-    </section>
+<!-- ═══ VENTANA: PERFIL ═══ -->
+<div class="window" id="win-perfil" style="left:70px;top:35px;width:500px;height:420px;">
+  <div class="titlebar" onmousedown="startDrag(event,'win-perfil')" ontouchstart="startDragTouch(event,'win-perfil')">
+    <svg class="titlebar-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#e8c84a"/><path d="M2 6 L7 6 L7 4 L9 4 L9 6 L14 6 L14 12 L2 12 Z" fill="#c8a820"/></svg>
+    <div class="titlebar-title">Perfil Profesional — Carlos Emilio Molas Martínez</div>
+    <div class="titlebar-buttons">
+      <div class="tb-btn tb-min" onclick="minimizeWin('win-perfil')">─</div>
+      <div class="tb-btn tb-max">□</div>
+      <div class="tb-btn tb-close" onclick="closeWindow('win-perfil')">✕</div>
+    </div>
   </div>
+  <div class="win-toolbar">
+    <div class="win-menu-item">Archivo</div>
+    <div class="win-menu-item">Edición</div>
+    <div class="win-menu-item">Ver</div>
+    <div class="win-menu-item">Ayuda</div>
+  </div>
+  <div class="win-addr">
+    <span class="addr-label">Dirección</span>
+    <input class="addr-box" value="C:\Portafolio\Perfil_Profesional" readonly>
+  </div>
+  <div class="win-body">
+    <div class="win-sidebar">
+      <div class="sidebar-section-title">Tareas</div>
+      <div class="sidebar-link">📄 Ver CV</div>
+      <div class="sidebar-link">📤 Compartir</div>
+      <div class="sidebar-section-title">Otros</div>
+      <div class="sidebar-link" onclick="openWindow('win-exp')">💼 Experiencia</div>
+      <div class="sidebar-link" onclick="openWindow('win-skills')">🔧 Habilidades</div>
+      <div class="sidebar-link" onclick="openWindow('win-edu')">🎓 Educación</div>
+    </div>
+    <div class="win-content">
+      <div class="content-panel">
+        <h2>👤 Perfil Profesional</h2>
+        <p>Profesional en Informática con formación técnica y universitaria, especializado en <strong>desarrollo mobile (Flutter/Android)</strong> y web (HTML/CSS/JS).</p>
+        <br>
+        <p>Experiencia en <strong>QA, desarrollo de software y liderazgo técnico</strong>. He trabajado con SAP S/4HANA, Azure DevOps, SQL, pruebas funcionales y tecnologías modernas como Flutter y Firebase.</p>
+        <br>
+        <p>Actualmente lidero el desarrollo de <strong>Ja'u</strong>, plataforma de gestión para restaurantes, participando en arquitectura, seguridad y escalabilidad del producto.</p>
+        <br>
+        <h3>📋 Datos Personales</h3>
+        <p>📧 emiliomolaspy@gmail.com</p>
+        <p>📱 +595 971 642 167</p>
+        <p>📍 Capiatá, Paraguay</p>
+        <p>🎂 13/08/2001</p>
+        <br>
+        <h3>💬 Idiomas</h3>
+        <div class="lang-row"><span class="lang-name">Español</span><div class="lang-bar" style="width:90%"></div></div>
+        <div class="lang-row"><span class="lang-name">Guaraní</span><div class="lang-bar" style="width:90%"></div></div>
+        <div class="lang-row"><span class="lang-name">Inglés</span><div class="lang-bar" style="width:35%;background:linear-gradient(90deg,#8aa8d0,#c0d4f0)"></div></div>
+        <br>
+        <h3>⭐ Competencias</h3>
+        <ul>
+          <li>Aprendizaje autodidacta aplicado a proyectos reales</li>
+          <li>Trabajo en equipo y comunicación interáreas</li>
+          <li>Resolución de problemas bajo presión / entornos ágiles</li>
+          <li>Orientación a la mejora continua de procesos</li>
+          <li>Responsabilidad, honestidad y compromiso</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="win-statusbar"><span>5 objetos</span><div class="status-sep"></div><span>Listo</span></div>
+</div>
 
-  <footer class="footer">
-    <p>© 2026 Carlos Emilio Molas Martinez</p>
-    <a href="#inicio" data-i18n="footer.top">Volver arriba</a>
-  </footer>
+<!-- ═══ VENTANA: EXPERIENCIA ═══ -->
+<div class="window" id="win-exp" style="left:120px;top:55px;width:540px;height:450px;">
+  <div class="titlebar" onmousedown="startDrag(event,'win-exp')" ontouchstart="startDragTouch(event,'win-exp')">
+    <svg class="titlebar-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#4a7ae8"/><rect x="3" y="5" width="10" height="7" rx="1" fill="#fff" opacity="0.8"/></svg>
+    <div class="titlebar-title">Experiencia Laboral</div>
+    <div class="titlebar-buttons">
+      <div class="tb-btn tb-min" onclick="minimizeWin('win-exp')">─</div>
+      <div class="tb-btn tb-max">□</div>
+      <div class="tb-btn tb-close" onclick="closeWindow('win-exp')">✕</div>
+    </div>
+  </div>
+  <div class="win-toolbar">
+    <div class="win-menu-item">Archivo</div>
+    <div class="win-menu-item">Ver</div>
+    <div class="win-menu-item">Ayuda</div>
+  </div>
+  <div class="win-addr">
+    <span class="addr-label">Dirección</span>
+    <input class="addr-box" value="C:\Portafolio\Experiencia_Laboral" readonly>
+  </div>
+  <div class="win-body">
+    <div class="win-sidebar">
+      <div class="sidebar-section-title">Filtrar</div>
+      <div class="sidebar-link">📅 Por fecha</div>
+      <div class="sidebar-link">🏢 Por empresa</div>
+      <div class="sidebar-section-title">Otros</div>
+      <div class="sidebar-link" onclick="openWindow('win-skills')">🔧 Habilidades</div>
+      <div class="sidebar-link" onclick="openWindow('win-jau')">🚀 Ja'u</div>
+    </div>
+    <div class="win-content">
+      <div class="content-panel">
+        <h2>💼 Experiencia Profesional</h2>
+        <div class="exp-block">
+          <div class="exp-title">Quality Assurance Engineer</div>
+          <div class="exp-company">🏦 Banco Continental</div>
+          <div class="exp-desc">Pruebas funcionales en entorno Scrum. Gestión de incidencias en <strong>Azure DevOps</strong>. Validación con <strong>SQL/PL/SQL</strong> (DBeaver). Testing de APIs REST con <strong>Postman</strong>. Colaboración con devs C# en ciclos de entrega continua.</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-title">Founder & Technical Lead</div>
+          <div class="exp-company">🍽️ Ja'u — Servicio de Pedidos</div>
+          <div class="exp-desc">Fundador y líder técnico. Arquitectura con <strong>Flutter, Firebase</strong> y web. Ciclo completo del producto. Estrategias de escalabilidad y seguridad. Modelo comercial y planes de crecimiento.</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-title">Operativo SAP S/4HANA</div>
+          <div class="exp-company">🏗️ Tecnoedil S.A.</div>
+          <div class="exp-desc">Facturación en módulos <strong>MM/PM de SAP</strong>. OT y seguimiento logístico end-to-end. Coordinación interáreas de mantenimiento correctivo y preventivo.</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-title">Desarrollador Mobile & Web</div>
+          <div class="exp-company">📱 Freelancer / Google Play Console</div>
+          <div class="exp-desc">Apps Android en <strong>Google Play</strong>. Flutter/Dart con Firebase. NFC, QR y Google Maps API. Paneles web con HTML, CSS y JS puro.</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-title">Técnico Informático (Pasantía)</div>
+          <div class="exp-company">⚡ ANDE – Adm. Nacional de Electricidad</div>
+          <div class="exp-desc">Mantenimiento preventivo y correctivo en entorno institucional.</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-title">Técnico Informático Independiente</div>
+          <div class="exp-company">🛠️ Servicio Particular</div>
+          <div class="exp-desc">Hardware/software, instalación de SO, malware, soporte a usuarios finales.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="win-statusbar"><span>6 objetos</span><div class="status-sep"></div><span>Listo</span></div>
+</div>
 
-  <script src="script.js?v=20260604-1642"></script>
+<!-- ═══ VENTANA: SKILLS ═══ -->
+<div class="window" id="win-skills" style="left:180px;top:75px;width:480px;height:390px;">
+  <div class="titlebar" onmousedown="startDrag(event,'win-skills')" ontouchstart="startDragTouch(event,'win-skills')">
+    <svg class="titlebar-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#d44ae0"/><circle cx="8" cy="8" r="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="8" cy="8" r="2" fill="#fff"/></svg>
+    <div class="titlebar-title">Habilidades Técnicas</div>
+    <div class="titlebar-buttons">
+      <div class="tb-btn tb-min" onclick="minimizeWin('win-skills')">─</div>
+      <div class="tb-btn tb-max">□</div>
+      <div class="tb-btn tb-close" onclick="closeWindow('win-skills')">✕</div>
+    </div>
+  </div>
+  <div class="win-toolbar">
+    <div class="win-menu-item">Archivo</div>
+    <div class="win-menu-item">Ver</div>
+    <div class="win-menu-item">Ayuda</div>
+  </div>
+  <div class="win-addr">
+    <span class="addr-label">Dirección</span>
+    <input class="addr-box" value="C:\Portafolio\Habilidades_Tecnicas" readonly>
+  </div>
+  <div class="win-body">
+    <div class="win-sidebar">
+      <div class="sidebar-section-title">Categorías</div>
+      <div class="sidebar-link">📱 Mobile</div>
+      <div class="sidebar-link">🧪 QA</div>
+      <div class="sidebar-link">🏢 ERP</div>
+    </div>
+    <div class="win-content">
+      <div class="content-panel">
+        <h2>🔧 Habilidades Técnicas</h2>
+        <h3>📱 Mobile & Web Development</h3>
+        <div><span class="tag">Flutter / Dart</span><span class="tag">Android / Java</span><span class="tag">Firebase</span><span class="tag">HTML / CSS / JS</span><span class="tag">MySQL</span><span class="tag">Google Maps API</span><span class="tag">Google Play Console</span></div>
+        <br>
+        <h3>🧪 QA & Testing</h3>
+        <div><span class="tag">Azure DevOps</span><span class="tag">Pruebas Funcionales</span><span class="tag">SQL / PL/SQL</span><span class="tag">DBeaver</span><span class="tag">Postman / APIs REST</span><span class="tag">Scrum / Agile</span></div>
+        <br>
+        <h3>🏢 ERP & Sistemas</h3>
+        <div><span class="tag">SAP S/4HANA</span><span class="tag">Módulos MM / PM</span><span class="tag">SOLPED / OT</span><span class="tag">Visual Studio / VS Code</span><span class="tag">Soporte IT</span></div>
+        <br>
+        <h3>🎨 Diseño & Otros</h3>
+        <div><span class="tag">Photoshop</span><span class="tag">Community Manager</span><span class="tag">Redes Informáticas</span><span class="tag">Hardware</span><span class="tag">NFC / QR</span><span class="tag">Cloud Storage</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="win-statusbar"><span>20 objetos</span><div class="status-sep"></div><span>Listo</span></div>
+</div>
+
+<!-- ═══ VENTANA: EDUCACIÓN ═══ -->
+<div class="window" id="win-edu" style="left:230px;top:90px;width:460px;height:400px;">
+  <div class="titlebar" onmousedown="startDrag(event,'win-edu')" ontouchstart="startDragTouch(event,'win-edu')">
+    <svg class="titlebar-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#e0602a"/><path d="M5 11 L8 7 L11 11 Z" fill="#fff"/><rect x="6.5" y="11" width="3" height="2" fill="#fff"/></svg>
+    <div class="titlebar-title">Educación & Certificaciones</div>
+    <div class="titlebar-buttons">
+      <div class="tb-btn tb-min" onclick="minimizeWin('win-edu')">─</div>
+      <div class="tb-btn tb-max">□</div>
+      <div class="tb-btn tb-close" onclick="closeWindow('win-edu')">✕</div>
+    </div>
+  </div>
+  <div class="win-toolbar">
+    <div class="win-menu-item">Archivo</div>
+    <div class="win-menu-item">Ver</div>
+    <div class="win-menu-item">Ayuda</div>
+  </div>
+  <div class="win-addr">
+    <span class="addr-label">Dirección</span>
+    <input class="addr-box" value="C:\Portafolio\Educacion" readonly>
+  </div>
+  <div class="win-body">
+    <div class="win-sidebar">
+      <div class="sidebar-section-title">Secciones</div>
+      <div class="sidebar-link">🎓 Universitaria</div>
+      <div class="sidebar-link">🏅 Cisco</div>
+      <div class="sidebar-link">📋 SNPP</div>
+    </div>
+    <div class="win-content">
+      <div class="content-panel">
+        <h2>🎓 Formación Académica</h2>
+        <div class="exp-block">
+          <div class="exp-title">Ingeniería en Informática</div>
+          <div class="exp-company">🏫 Universidad Columbia del Paraguay</div>
+          <div class="exp-desc">2020 – Presente · Tesis pendiente</div>
+        </div>
+        <div class="exp-block">
+          <div class="exp-title">Técnico en Informática</div>
+          <div class="exp-company">🏫 Centro Educativo Integral de las Américas</div>
+          <div class="exp-desc">2019 · 🏆 <strong>Mejor Egresado de la promoción</strong></div>
+        </div>
+        <h2 style="margin-top:12px">🏅 Cisco Networking Academy</h2>
+        <div class="cert-item"><div class="cert-dot"></div><span>Intro a Ciberseguridad</span></div>
+        <div class="cert-item"><div class="cert-dot"></div><span>Networking Basics</span></div>
+        <div class="cert-item"><div class="cert-dot"></div><span>Computer Hardware Basics</span></div>
+        <div class="cert-item"><div class="cert-dot"></div><span>Introducción a Redes (Cisco)</span></div>
+        <h2 style="margin-top:12px">📋 SNPP</h2>
+        <div class="cert-item"><div class="cert-dot"></div><span>Diseño Gráfico (Photoshop)</span></div>
+        <div class="cert-item"><div class="cert-dot"></div><span>Community Manager</span></div>
+        <div class="cert-item"><div class="cert-dot"></div><span>Redes Informáticas</span></div>
+        <div class="cert-item"><div class="cert-dot"></div><span>Mantenimiento de Equipos Informáticos</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="win-statusbar"><span>8 objetos</span><div class="status-sep"></div><span>Listo</span></div>
+</div>
+
+<!-- ═══ VENTANA: JA'U ═══ -->
+<div class="window" id="win-jau" style="left:290px;top:65px;width:460px;height:380px;">
+  <div class="titlebar" onmousedown="startDrag(event,'win-jau')" ontouchstart="startDragTouch(event,'win-jau')">
+    <svg class="titlebar-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#20b870"/><text x="8" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" font-family="Arial">J</text></svg>
+    <div class="titlebar-title">Ja'u — Gestión de Restaurantes</div>
+    <div class="titlebar-buttons">
+      <div class="tb-btn tb-min" onclick="minimizeWin('win-jau')">─</div>
+      <div class="tb-btn tb-max">□</div>
+      <div class="tb-btn tb-close" onclick="closeWindow('win-jau')">✕</div>
+    </div>
+  </div>
+  <div class="win-toolbar">
+    <div class="win-menu-item">Archivo</div>
+    <div class="win-menu-item">Ver</div>
+    <div class="win-menu-item">Ayuda</div>
+  </div>
+  <div class="win-addr">
+    <span class="addr-label">Dirección</span>
+    <input class="addr-box" value="C:\Portafolio\Proyectos\Jau" readonly>
+  </div>
+  <div class="win-body">
+    <div class="win-sidebar">
+      <div class="sidebar-section-title">Módulos</div>
+      <div class="sidebar-link">📱 App Móvil</div>
+      <div class="sidebar-link">🌐 Panel Web</div>
+      <div class="sidebar-link">☁️ Firebase</div>
+      <div class="sidebar-section-title">Estado</div>
+      <div class="sidebar-link" style="color:#aaff88">✅ En desarrollo</div>
+    </div>
+    <div class="win-content">
+      <div class="content-panel">
+        <h2>🍽️ Ja'u — Servicio de Pedidos</h2>
+        <p><strong>Founder & Technical Lead</strong>: plataforma completa de gestión de pedidos y operaciones para restaurantes.</p>
+        <br>
+        <h3>🛠️ Stack Tecnológico</h3>
+        <div><span class="tag">Flutter</span><span class="tag">Firebase Auth</span><span class="tag">Firestore</span><span class="tag">Cloud Storage</span><span class="tag">HTML/CSS/JS</span><span class="tag">Android</span></div>
+        <br>
+        <h3>🚀 Módulos</h3>
+        <ul>
+          <li>Pedidos para mozos (Flutter app)</li>
+          <li>Kitchen Display en tiempo real</li>
+          <li>Panel administrativo web</li>
+          <li>Autenticación y roles</li>
+          <li>Integración de servicios externos</li>
+        </ul>
+        <br>
+        <h3>📐 Responsabilidades</h3>
+        <ul>
+          <li>Arquitectura de software</li>
+          <li>Planificación de versiones</li>
+          <li>Escalabilidad y seguridad</li>
+          <li>Modelo comercial y crecimiento</li>
+          <li>QA y validación de requerimientos</li>
+        </ul>
+        <br>
+        <p style="color:#666;font-style:italic">Estética: Liquid Glass · Login/welcome activo</p>
+      </div>
+    </div>
+  </div>
+  <div class="win-statusbar"><span>5 archivos</span><div class="status-sep"></div><span>En desarrollo activo</span></div>
+</div>
+
+<!-- ═══ VENTANA: CONTACTO ═══ -->
+<div class="window" id="win-contacto" style="left:340px;top:110px;width:360px;height:290px;">
+  <div class="titlebar" onmousedown="startDrag(event,'win-contacto')" ontouchstart="startDragTouch(event,'win-contacto')">
+    <svg class="titlebar-icon" viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" rx="1" fill="#fffbe8" stroke="#c8a820" stroke-width="1"/><path d="M1 4 L8 10 L15 4" stroke="#c8a820" stroke-width="1" fill="none"/></svg>
+    <div class="titlebar-title">Contacto</div>
+    <div class="titlebar-buttons">
+      <div class="tb-btn tb-min" onclick="minimizeWin('win-contacto')">─</div>
+      <div class="tb-btn tb-max">□</div>
+      <div class="tb-btn tb-close" onclick="closeWindow('win-contacto')">✕</div>
+    </div>
+  </div>
+  <div class="win-toolbar">
+    <div class="win-menu-item">Archivo</div>
+    <div class="win-menu-item">Ayuda</div>
+  </div>
+  <div class="win-addr">
+    <span class="addr-label">Dirección</span>
+    <input class="addr-box" value="C:\Portafolio\Contacto" readonly>
+  </div>
+  <div class="win-body">
+    <div class="win-content">
+      <div class="content-panel">
+        <h2>📬 Información de Contacto</h2>
+        <div class="exp-block"><p>📧 <strong>Email:</strong> emiliomolaspy@gmail.com</p></div>
+        <div class="exp-block"><p>📱 <strong>Teléfono:</strong> +595 971 642 167</p></div>
+        <div class="exp-block"><p>📍 <strong>Ubicación:</strong> Capiatá, Paraguay</p></div>
+        <br>
+        <h3>📞 Referencias</h3>
+        <div class="cert-item"><div class="cert-dot"></div><span><strong>Ing. German Guerrero:</strong> 0981 810081</span></div>
+        <div class="cert-item"><div class="cert-dot"></div><span><strong>Claudio Dariel Paredes:</strong> 0986 966713</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="win-statusbar"><span>Listo</span></div>
+</div>
+
+
+<!-- ═══ MENÚ INICIO ═══ -->
+<div id="start-menu">
+  <div class="sm-header">
+    <div class="sm-avatar">EM</div>
+    <div class="sm-username">Emilio Molas</div>
+  </div>
+  <div class="sm-body">
+    <div class="sm-left">
+      <div class="sm-item" onclick="openWindow('win-perfil');toggleStart()"><div class="sm-item-icon">👤</div>Perfil Profesional</div>
+      <div class="sm-item" onclick="openWindow('win-exp');toggleStart()"><div class="sm-item-icon">💼</div>Experiencia Laboral</div>
+      <div class="sm-item" onclick="openWindow('win-skills');toggleStart()"><div class="sm-item-icon">🔧</div>Habilidades Técnicas</div>
+      <div class="sm-item" onclick="openWindow('win-edu');toggleStart()"><div class="sm-item-icon">🎓</div>Educación & Certs</div>
+      <div class="sm-item" onclick="openWindow('win-jau');toggleStart()"><div class="sm-item-icon">🍽️</div>Proyecto Ja'u</div>
+      <div class="sm-sep"></div>
+      <div class="sm-item" onclick="openWindow('win-contacto');toggleStart()"><div class="sm-item-icon">📬</div>Contacto</div>
+    </div>
+    <div class="sm-right">
+      <div class="sm-item"><div class="sm-item-icon">📁</div>Mis documentos</div>
+      <div class="sm-item"><div class="sm-item-icon">🖼️</div>Mis imágenes</div>
+      <div class="sm-item"><div class="sm-item-icon">🎵</div>Mi música</div>
+      <div class="sm-sep"></div>
+      <div class="sm-item"><div class="sm-item-icon">🔎</div>Buscar</div>
+      <div class="sm-item"><div class="sm-item-icon">⚙️</div>Ejecutar...</div>
+    </div>
+  </div>
+  <div class="sm-footer">
+    <div class="sm-footer-btn">🔒 Cerrar sesión</div>
+    <div class="sm-footer-btn">⏻ Apagar</div>
+  </div>
+</div>
+
+
+<!-- ═══ TASKBAR ═══ -->
+<div id="taskbar">
+  <button id="start-btn" onclick="toggleStart()">
+    <div class="start-orb"></div>
+    inicio
+  </button>
+  <div id="taskbar-tasks"></div>
+  <div id="tray">
+    <svg width="14" height="14" viewBox="0 0 16 16"><rect x="2" y="8" width="3" height="6" fill="#fff" opacity="0.7"/><rect x="6.5" y="5" width="3" height="9" fill="#fff" opacity="0.85"/><rect x="11" y="2" width="3" height="12" fill="#fff"/></svg>
+    <div id="clock">00:00<br>00/00</div>
+  </div>
+</div>
+
+<!-- Burbuja -->
+<div id="bubble">Toca una carpeta<br>para abrirla 📁</div>
+
+<script>
+// ─── RELOJ ───
+function updateClock() {
+  const n = new Date();
+  const h = String(n.getHours()).padStart(2,'0');
+  const m = String(n.getMinutes()).padStart(2,'0');
+  const d = String(n.getDate()).padStart(2,'0');
+  const mo = String(n.getMonth()+1).padStart(2,'0');
+  document.getElementById('clock').innerHTML = `${h}:${m}<br>${d}/${mo}`;
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ─── MOBILE DETECTION ───
+const isMobile = () => window.innerWidth <= 600;
+
+// ─── MENÚ INICIO ───
+function toggleStart() {
+  const m = document.getElementById('start-menu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+}
+
+// ─── SELECCIÓN ÍCONOS ───
+function selectIcon(el) {
+  document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// Touch en ícono: un toque abre en móvil
+let iconTouchTimer = null;
+function iconTouch(e, el, id) {
+  e.preventDefault();
+  selectIcon(el);
+  openWindow(id);
+}
+
+// ─── GESTIÓN DE VENTANAS ───
+let zTop = 200;
+const taskWindows = {};
+
+function openWindow(id) {
+  // En móvil, cerrar otras ventanas abiertas primero
+  if (isMobile()) {
+    document.querySelectorAll('.window.active').forEach(w => {
+      if (w.id !== id) w.classList.remove('active');
+    });
+  }
+  const win = document.getElementById(id);
+  win.classList.add('active','opening');
+  setTimeout(() => win.classList.remove('opening'), 160);
+  bringToFront(win);
+  addTaskBtn(id, win.querySelector('.titlebar-title').textContent);
+  document.getElementById('start-menu').style.display = 'none';
+}
+
+function closeWindow(id) {
+  document.getElementById(id).classList.remove('active');
+  removeTaskBtn(id);
+}
+
+function minimizeWin(id) {
+  document.getElementById(id).classList.remove('active');
+  if (taskWindows[id]) taskWindows[id].classList.remove('active-task');
+}
+
+function bringToFront(win) {
+  zTop++;
+  win.style.zIndex = zTop;
+  document.querySelectorAll('.task-btn').forEach(b => b.classList.remove('active-task'));
+  if (taskWindows[win.id]) taskWindows[win.id].classList.add('active-task');
+}
+
+function addTaskBtn(id, title) {
+  const bar = document.getElementById('taskbar-tasks');
+  if (taskWindows[id]) {
+    document.querySelectorAll('.task-btn').forEach(b => b.classList.remove('active-task'));
+    taskWindows[id].classList.add('active-task');
+    return;
+  }
+  const btn = document.createElement('button');
+  btn.className = 'task-btn active-task';
+  const short = title.split('—')[0].trim().substring(0, 16);
+  btn.textContent = '📁 ' + short;
+  btn.onclick = () => {
+    const win = document.getElementById(id);
+    if (win.classList.contains('active')) { minimizeWin(id); }
+    else { win.classList.add('active'); bringToFront(win); }
+  };
+  bar.appendChild(btn);
+  taskWindows[id] = btn;
+  document.querySelectorAll('.task-btn').forEach(b => b.classList.remove('active-task'));
+  btn.classList.add('active-task');
+}
+
+function removeTaskBtn(id) {
+  if (taskWindows[id]) { taskWindows[id].remove(); delete taskWindows[id]; }
+}
+
+// ─── DRAG MOUSE ───
+function startDrag(e, id) {
+  if (isMobile()) return;
+  const win = document.getElementById(id);
+  bringToFront(win);
+  const ox = e.clientX - win.offsetLeft;
+  const oy = e.clientY - win.offsetTop;
+  function onMove(e) {
+    let nx = Math.max(0, Math.min(e.clientX - ox, window.innerWidth - 60));
+    let ny = Math.max(0, Math.min(e.clientY - oy, window.innerHeight - 60));
+    win.style.left = nx + 'px';
+    win.style.top = ny + 'px';
+  }
+  function onUp() {
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onUp);
+  }
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onUp);
+  e.preventDefault();
+}
+
+// ─── DRAG TOUCH (desktop solamente, en mobile las ventanas son fullscreen) ───
+function startDragTouch(e, id) {
+  if (isMobile()) return;
+  const win = document.getElementById(id);
+  bringToFront(win);
+  const t = e.touches[0];
+  const ox = t.clientX - win.offsetLeft;
+  const oy = t.clientY - win.offsetTop;
+  function onMove(e) {
+    const t = e.touches[0];
+    let nx = Math.max(0, Math.min(t.clientX - ox, window.innerWidth - 60));
+    let ny = Math.max(0, Math.min(t.clientY - oy, window.innerHeight - 60));
+    win.style.left = nx + 'px';
+    win.style.top = ny + 'px';
+    e.preventDefault();
+  }
+  function onEnd() {
+    document.removeEventListener('touchmove', onMove);
+    document.removeEventListener('touchend', onEnd);
+  }
+  document.addEventListener('touchmove', onMove, { passive: false });
+  document.addEventListener('touchend', onEnd);
+  e.preventDefault();
+}
+
+// ─── CLICK EN ESCRITORIO ───
+document.getElementById('desktop').addEventListener('click', function(e) {
+  if (!e.target.closest('.desktop-icon')) {
+    document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
+  }
+  if (!e.target.closest('#start-btn')) {
+    document.getElementById('start-menu').style.display = 'none';
+  }
+});
+
+// ─── BURBUJA ───
+setTimeout(() => {
+  const b = document.getElementById('bubble');
+  b.style.display = 'block';
+  setTimeout(() => b.style.display = 'none', 3500);
+}, 900);
+</script>
 </body>
 </html>
