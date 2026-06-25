@@ -32,7 +32,7 @@
     width: 100vw;
     height: calc(100vh - var(--tb-h));
     overflow: hidden;
-    background: #3a6ea5;
+    background: #3a6ea5 url("images/xp-wallpaper.jpg") center center / cover no-repeat;
   }
 
   #wallpaper {
@@ -40,6 +40,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
+    display: none;
   }
 
   /* ═══════════════════════════════════
@@ -74,6 +75,29 @@
     z-index: 10;
   }
 
+  #project-icons {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 12;
+  }
+
+  #project-icons .desktop-icon {
+    width: 88px;
+    padding: 7px 5px;
+    border-radius: 4px;
+    background: rgba(0, 34, 90, 0.18);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.18);
+    backdrop-filter: blur(2px);
+  }
+
+  #project-icons .desktop-icon:hover {
+    background: rgba(49,106,197,0.58);
+  }
+
   /* MÓVIL: grilla abajo */
   @media (max-width: 600px) {
     #icons {
@@ -87,6 +111,15 @@
       gap: 6px;
       width: calc(100vw - 16px);
       max-width: 400px;
+    }
+    #project-icons {
+      top: 10px;
+      right: 8px;
+      gap: 7px;
+    }
+    #project-icons .desktop-icon {
+      width: 64px;
+      padding: 4px;
     }
     #sky-name {
       top: 4%;
@@ -183,8 +216,22 @@
     flex-direction: column;
     z-index: 100;
     border-radius: 6px 6px 0 0;
+    resize: both;
+    overflow: hidden;
   }
   .window.active { display: flex; }
+  .window.maximized {
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    height: calc(100vh - var(--tb-h)) !important;
+    resize: none;
+    border-radius: 0;
+  }
+  .window.maximized .titlebar {
+    border-radius: 0;
+    cursor: default;
+  }
 
   /* MÓVIL: ventana fullscreen */
   @media (max-width: 600px) {
@@ -733,6 +780,37 @@
       <div class="icon-label">Educación</div>
     </div>
 
+    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-build')" onclick="openWindow('win-build')">
+      <div class="icon-img">
+        <svg class="folder-svg" viewBox="0 0 40 36"><path d="M2 10 Q2 6 6 6 L14 6 L17 9 L34 9 Q38 9 38 13 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#28a58c" stroke="#137765" stroke-width="1"/><path d="M2 14 L38 14 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#42c5a8" stroke="#137765" stroke-width="1"/><path d="M13 22 L18 27 L28 16" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.78"/></svg>
+      </div>
+      <div class="icon-label">Cómo se armó</div>
+    </div>
+
+    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-tech')" onclick="openWindow('win-tech')">
+      <div class="icon-img">
+        <svg class="folder-svg" viewBox="0 0 40 36"><path d="M2 10 Q2 6 6 6 L14 6 L17 9 L34 9 Q38 9 38 13 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#8a66d9" stroke="#5d3aaa" stroke-width="1"/><path d="M2 14 L38 14 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#a584ee" stroke="#5d3aaa" stroke-width="1"/><circle cx="20" cy="23" r="7" fill="none" stroke="#fff" stroke-width="2" opacity="0.72"/><path d="M20 16 L20 30 M13 23 L27 23" stroke="#fff" stroke-width="1.6" opacity="0.72"/></svg>
+      </div>
+      <div class="icon-label">Tecnologías</div>
+    </div>
+
+    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-git')" onclick="openWindow('win-git')">
+      <div class="icon-img">
+        <svg class="folder-svg" viewBox="0 0 40 36"><path d="M2 10 Q2 6 6 6 L14 6 L17 9 L34 9 Q38 9 38 13 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#333b4f" stroke="#1d2332" stroke-width="1"/><path d="M2 14 L38 14 L38 30 Q38 34 34 34 L6 34 Q2 34 2 30 Z" fill="#4d5872" stroke="#1d2332" stroke-width="1"/><path d="M13 24 H27 M20 17 V29 M15 19 L20 17 L25 19" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity="0.78"/></svg>
+      </div>
+      <div class="icon-label">Git / Versiones</div>
+    </div>
+
+    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-contacto')" onclick="openWindow('win-contacto')">
+      <div class="icon-img">
+        <svg viewBox="0 0 40 36" width="40" height="36"><rect x="4" y="8" width="32" height="22" rx="2" fill="#fffbe8" stroke="#c8a820" stroke-width="1.5"/><path d="M4 10 L20 22 L36 10" stroke="#c8a820" stroke-width="1.5" fill="none"/><line x1="4" y1="30" x2="14" y2="20" stroke="#c8a820" stroke-width="1"/><line x1="36" y1="30" x2="26" y2="20" stroke="#c8a820" stroke-width="1"/></svg>
+      </div>
+      <div class="icon-label">Contacto</div>
+    </div>
+
+  </div><!-- /icons -->
+
+  <div id="project-icons">
     <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-jau')" onclick="openWindow('win-jau')">
       <div class="icon-img">
         <img class="app-logo-icon" src="images/logo_app.png" alt="Logo Ja'u">
@@ -746,15 +824,7 @@
       </div>
       <div class="icon-label">TurnUp</div>
     </div>
-
-    <div class="desktop-icon" ontouchstart="iconTouch(event,this,'win-contacto')" onclick="openWindow('win-contacto')">
-      <div class="icon-img">
-        <svg viewBox="0 0 40 36" width="40" height="36"><rect x="4" y="8" width="32" height="22" rx="2" fill="#fffbe8" stroke="#c8a820" stroke-width="1.5"/><path d="M4 10 L20 22 L36 10" stroke="#c8a820" stroke-width="1.5" fill="none"/><line x1="4" y1="30" x2="14" y2="20" stroke="#c8a820" stroke-width="1"/><line x1="36" y1="30" x2="26" y2="20" stroke="#c8a820" stroke-width="1"/></svg>
-      </div>
-      <div class="icon-label">Contacto</div>
-    </div>
-
-  </div><!-- /icons -->
+  </div>
 </div><!-- /desktop -->
 
 
@@ -1106,7 +1176,131 @@
   <div class="win-statusbar"><span>3 archivos</span><div class="status-sep"></div><span>Publicado</span></div>
 </div>
 
-<!-- ═══ VENTANA: CONTACTO ═══ -->
+<!-- VENTANAS: DOCUMENTACION -->
+<!-- VENTANA: COMO SE ARMO -->
+<div class="window" id="win-build" style="left:260px;top:85px;width:500px;height:360px;">
+  <div class="titlebar" onmousedown="startDrag(event,'win-build')" ontouchstart="startDragTouch(event,'win-build')">
+    <svg class="titlebar-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#42c5a8"/><path d="M4 8 L7 11 L12 5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="titlebar-title">Cómo se armó este portafolio</div>
+    <div class="titlebar-buttons">
+      <div class="tb-btn tb-min" onclick="minimizeWin('win-build')">─</div>
+      <div class="tb-btn tb-max">□</div>
+      <div class="tb-btn tb-close" onclick="closeWindow('win-build')">✕</div>
+    </div>
+  </div>
+  <div class="win-toolbar">
+    <div class="win-menu-item">Archivo</div>
+    <div class="win-menu-item">Ver</div>
+    <div class="win-menu-item">Ayuda</div>
+  </div>
+  <div class="win-addr">
+    <span class="addr-label">Dirección</span>
+    <input class="addr-box" value="C:\Portafolio\Documentacion\Como_se_armo" readonly>
+  </div>
+  <div class="win-body">
+    <div class="win-sidebar">
+      <div class="sidebar-section-title">Carpetas</div>
+      <div class="sidebar-link" onclick="openWindow('win-tech')">🧩 Tecnologías</div>
+      <div class="sidebar-link" onclick="openWindow('win-git')">🔁 Git / Versiones</div>
+      <div class="sidebar-link" onclick="openWindow('win-jau')">🍽️ Ja'u</div>
+      <div class="sidebar-link" onclick="openWindow('win-turnup')">🌐 TurnUp</div>
+    </div>
+    <div class="win-content">
+      <div class="content-panel">
+        <h2>Diseño tipo Windows XP, hecho a medida</h2>
+        <p>El portafolio funciona como un escritorio interactivo: carpetas para navegar el perfil, accesos directos destacados para productos propios y ventanas que se pueden mover, minimizar, maximizar y agrandar.</p>
+        <div class="exp-block"><div class="exp-title">Base técnica</div><div class="exp-desc">Un solo <strong>index.html</strong> con HTML, CSS y JavaScript puro para que sea rápido, fácil de publicar y compatible con GitHub Pages.</div></div>
+        <div class="exp-block"><div class="exp-title">Experiencia visual</div><div class="exp-desc">Fondo XP real, íconos tipo escritorio, barra de tareas, menú de inicio, ventanas con estética clásica y adaptación para móvil.</div></div>
+        <div class="exp-block"><div class="exp-title">Objetivo</div><div class="exp-desc">Presentar el perfil técnico de forma memorable, pero usable: el visitante puede explorar carrera, habilidades, educación, contacto y proyectos publicados.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="win-statusbar"><span>Documentación</span><div class="status-sep"></div><span>Actualizado</span></div>
+</div>
+
+<!-- VENTANA: TECNOLOGIAS -->
+<div class="window" id="win-tech" style="left:300px;top:105px;width:500px;height:360px;">
+  <div class="titlebar" onmousedown="startDrag(event,'win-tech')" ontouchstart="startDragTouch(event,'win-tech')">
+    <svg class="titlebar-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#a584ee"/><circle cx="8" cy="8" r="4" fill="none" stroke="#fff" stroke-width="1.6"/></svg>
+    <div class="titlebar-title">Tecnologías usadas</div>
+    <div class="titlebar-buttons">
+      <div class="tb-btn tb-min" onclick="minimizeWin('win-tech')">─</div>
+      <div class="tb-btn tb-max">□</div>
+      <div class="tb-btn tb-close" onclick="closeWindow('win-tech')">✕</div>
+    </div>
+  </div>
+  <div class="win-toolbar">
+    <div class="win-menu-item">Archivo</div>
+    <div class="win-menu-item">Ver</div>
+    <div class="win-menu-item">Ayuda</div>
+  </div>
+  <div class="win-addr">
+    <span class="addr-label">Dirección</span>
+    <input class="addr-box" value="C:\Portafolio\Documentacion\Tecnologias" readonly>
+  </div>
+  <div class="win-body">
+    <div class="win-sidebar">
+      <div class="sidebar-section-title">Stack</div>
+      <div class="sidebar-link">🌐 Frontend</div>
+      <div class="sidebar-link">☁️ Hosting</div>
+      <div class="sidebar-link">📱 Apps</div>
+    </div>
+    <div class="win-content">
+      <div class="content-panel">
+        <h2>Stack del portafolio y productos</h2>
+        <div><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Git</span><span class="tag">GitHub Pages</span><span class="tag">Firebase Hosting</span><span class="tag">Flutter</span><span class="tag">Firestore</span></div>
+        <br>
+        <div class="exp-block"><div class="exp-title">Portafolio</div><div class="exp-desc">Interfaz personalizada con CSS y JS puro: ventanas, escritorio, barra de tareas, menú de inicio, responsive y comportamiento de ventanas.</div></div>
+        <div class="exp-block"><div class="exp-title">Ja'u</div><div class="exp-desc">Producto orientado a restaurantes, pedidos, operación interna y paneles de gestión con enfoque en escalabilidad, roles y tiempo real.</div></div>
+        <div class="exp-block"><div class="exp-title">TurnUp</div><div class="exp-desc">Presencia web publicada, pensada para comunicación clara, acceso rápido y experiencia responsive.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="win-statusbar"><span>8 tecnologías</span><div class="status-sep"></div><span>Listo</span></div>
+</div>
+
+<!-- VENTANA: GIT Y VERSIONES -->
+<div class="window" id="win-git" style="left:320px;top:125px;width:520px;height:390px;">
+  <div class="titlebar" onmousedown="startDrag(event,'win-git')" ontouchstart="startDragTouch(event,'win-git')">
+    <svg class="titlebar-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="2" fill="#4d5872"/><path d="M4 10 H12 M8 4 V12" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <div class="titlebar-title">Git, publicación y versiones</div>
+    <div class="titlebar-buttons">
+      <div class="tb-btn tb-min" onclick="minimizeWin('win-git')">─</div>
+      <div class="tb-btn tb-max">□</div>
+      <div class="tb-btn tb-close" onclick="closeWindow('win-git')">✕</div>
+    </div>
+  </div>
+  <div class="win-toolbar">
+    <div class="win-menu-item">Archivo</div>
+    <div class="win-menu-item">Ver</div>
+    <div class="win-menu-item">Ayuda</div>
+  </div>
+  <div class="win-addr">
+    <span class="addr-label">Dirección</span>
+    <input class="addr-box" value="C:\Portafolio\Documentacion\Git_Versiones" readonly>
+  </div>
+  <div class="win-body">
+    <div class="win-sidebar">
+      <div class="sidebar-section-title">Publicación</div>
+      <div class="sidebar-link">🔁 Git</div>
+      <div class="sidebar-link">🐙 GitHub</div>
+      <div class="sidebar-link">🌍 GitHub Pages</div>
+    </div>
+    <div class="win-content">
+      <div class="content-panel">
+        <h2>Historial de evolución</h2>
+        <div class="exp-block"><div class="exp-title">V1 — Base profesional</div><div class="exp-desc">Primera versión del perfil, con presentación profesional, secciones principales y navegación simple.</div></div>
+        <div class="exp-block"><div class="exp-title">V2 — Identidad visual</div><div class="exp-desc">Tema oscuro, estética glass, bandera de Paraguay, logos educativos y empresas que confiaron.</div></div>
+        <div class="exp-block"><div class="exp-title">V3 — Escritorio Windows XP</div><div class="exp-desc">Cambio a experiencia interactiva tipo sistema operativo con carpetas, ventanas, menú de inicio y barra de tareas.</div></div>
+        <div class="exp-block"><div class="exp-title">V4 — Proyectos publicados</div><div class="exp-desc">Accesos a Ja'u y TurnUp, logos reales y enlaces directos a sus webs.</div></div>
+        <div class="exp-block"><div class="exp-title">V5 — Fondo XP y ventanas reales</div><div class="exp-desc">Wallpaper real, carpetas de documentación, accesos destacados y ventanas redimensionables/maximizables.</div></div>
+        <p><strong>Flujo:</strong> cambios locales en <strong>E:\Portafolio</strong>, control de versiones con Git, push a GitHub y publicación automática con GitHub Pages.</p>
+      </div>
+    </div>
+  </div>
+  <div class="win-statusbar"><span>5 versiones</span><div class="status-sep"></div><span>Publicado con GitHub Pages</span></div>
+</div>
+
 <div class="window" id="win-contacto" style="left:340px;top:110px;width:360px;height:290px;">
   <div class="titlebar" onmousedown="startDrag(event,'win-contacto')" ontouchstart="startDragTouch(event,'win-contacto')">
     <svg class="titlebar-icon" viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" rx="1" fill="#fffbe8" stroke="#c8a820" stroke-width="1"/><path d="M1 4 L8 10 L15 4" stroke="#c8a820" stroke-width="1" fill="none"/></svg>
@@ -1155,6 +1349,9 @@
       <div class="sm-item" onclick="openWindow('win-exp');toggleStart()"><div class="sm-item-icon">💼</div>Experiencia Laboral</div>
       <div class="sm-item" onclick="openWindow('win-skills');toggleStart()"><div class="sm-item-icon">🔧</div>Habilidades Técnicas</div>
       <div class="sm-item" onclick="openWindow('win-edu');toggleStart()"><div class="sm-item-icon">🎓</div>Educación & Certs</div>
+      <div class="sm-item" onclick="openWindow('win-build');toggleStart()"><div class="sm-item-icon">📁</div>Cómo se armó</div>
+      <div class="sm-item" onclick="openWindow('win-tech');toggleStart()"><div class="sm-item-icon">🧩</div>Tecnologías</div>
+      <div class="sm-item" onclick="openWindow('win-git');toggleStart()"><div class="sm-item-icon">🔁</div>Git / Versiones</div>
       <div class="sm-item" onclick="openWindow('win-jau');toggleStart()"><div class="sm-item-icon">🍽️</div>Proyecto Ja'u</div>
       <div class="sm-item" onclick="openWindow('win-turnup');toggleStart()"><div class="sm-item-icon">🌐</div>Proyecto TurnUp</div>
       <div class="sm-sep"></div>
@@ -1231,6 +1428,7 @@ function iconTouch(e, el, id) {
 // ─── GESTIÓN DE VENTANAS ───
 let zTop = 200;
 const taskWindows = {};
+const windowRestoreState = {};
 
 function openWindow(id) {
   // En móvil, cerrar otras ventanas abiertas primero
@@ -1248,7 +1446,7 @@ function openWindow(id) {
 }
 
 function closeWindow(id) {
-  document.getElementById(id).classList.remove('active');
+  document.getElementById(id).classList.remove('active','maximized');
   removeTaskBtn(id);
 }
 
@@ -1256,6 +1454,40 @@ function minimizeWin(id) {
   document.getElementById(id).classList.remove('active');
   if (taskWindows[id]) taskWindows[id].classList.remove('active-task');
 }
+
+function toggleMaximize(id) {
+  const win = document.getElementById(id);
+  if (!win || isMobile()) return;
+
+  if (!win.classList.contains('maximized')) {
+    windowRestoreState[id] = {
+      left: win.style.left,
+      top: win.style.top,
+      width: win.style.width,
+      height: win.style.height
+    };
+    win.classList.add('maximized');
+  } else {
+    win.classList.remove('maximized');
+    const prev = windowRestoreState[id];
+    if (prev) {
+      win.style.left = prev.left;
+      win.style.top = prev.top;
+      win.style.width = prev.width;
+      win.style.height = prev.height;
+    }
+  }
+
+  bringToFront(win);
+}
+
+document.querySelectorAll('.tb-max').forEach(btn => {
+  btn.addEventListener('click', event => {
+    event.stopPropagation();
+    const win = btn.closest('.window');
+    if (win) toggleMaximize(win.id);
+  });
+});
 
 function bringToFront(win) {
   zTop++;
@@ -1294,6 +1526,7 @@ function removeTaskBtn(id) {
 function startDrag(e, id) {
   if (isMobile()) return;
   const win = document.getElementById(id);
+  if (win.classList.contains('maximized')) return;
   bringToFront(win);
   const ox = e.clientX - win.offsetLeft;
   const oy = e.clientY - win.offsetTop;
@@ -1316,6 +1549,7 @@ function startDrag(e, id) {
 function startDragTouch(e, id) {
   if (isMobile()) return;
   const win = document.getElementById(id);
+  if (win.classList.contains('maximized')) return;
   bringToFront(win);
   const t = e.touches[0];
   const ox = t.clientX - win.offsetLeft;
